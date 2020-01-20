@@ -5,9 +5,6 @@ This set of entrypoints is designed to serve the needs of NatureCounts mobile ap
 All queries are over HTTPS GET requests. Query responses are JSON object, mostly structured as a 'data frame': attribute names are the data
 field names, and attribute values are vectors of field values.
 
-A basic data query looks like this (sandbox server is the only current host supporting the api):
-
-> https://sandbox.birdscanada.org/api/....
 
 
 
