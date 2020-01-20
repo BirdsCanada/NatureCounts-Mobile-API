@@ -45,22 +45,33 @@ Required parameter: **password** - the account password
 
 
 
-## Lookup Data Querying ##
+## Reference Data ##
 
-All results are returned as 'data frames', suitable for R client parsing / management.
+
+Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
+for a complete forced refresh. The dataVersion parameter returned by the first entry point below should be
+checked against a stpred value: if this parameter value cahnges, a complete refresh of Reference Data is in order.
+
+All Reference data results are returned as JSON objects, structured as 'data frames'. The query result columns (fields) occur
+as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
+query records can be constructed by combining the vectore values across all attributes in the JSON object.
+
 
 A basic data query looks like this:
 
-> /api/metadata/entryPoint?token=asdfasdf
+> https://sandbox.birdscanada.org/api/....
 
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
+Certain Reference Data queries require a user authentication token parameter, and additional
+filtering parameters are used on some of the queries (see below).
 
-The filter object carries atributes whose name is the field to be filtered, and whose value is the value to
-use in filtering. Multiple filters can be included in a request.
 
-The filter mechanism only supports equality operations.
+### Breeding Codes ###
+
+Returns a list of breeding evidence codes.
+
+> https://sandbox.birdscanada.org/api/metadata/breeding_codes
+
+Authenticated: No
 
 
 ### Projects ###
@@ -144,13 +155,6 @@ Return a list of projects that allow public participation, along with protocols
 
 
 
-### Breeding Codes ###
-
-> /api/metadata/breeding_codes?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
 
 
 ### Provinces ###
@@ -207,4 +211,3 @@ HTTP POST.
 
 
 ### Submit Observations ###
-
