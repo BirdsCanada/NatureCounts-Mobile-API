@@ -23,12 +23,11 @@ All results are returned as 'data frames', suitable for R client parsing / manag
 
 A basic data query looks like this:
 
-> /api/query?token=asdfasdf&table=lk_provinces&filter={}
+> /api/metadata/entryPoint?token=asdfasdf
 
 | Parameter Name | Type | Required |Explanation |
 |----------------|------|----------|------------|
 |token|String|Yes|The user's token, returned by the authentication mechanism|
-|filter|JSONObject|No|an optional set of filters for the query|
 
 The filter object carries atributes whose name is the field to be filtered, and whose value is the value to
 use in filtering. Multiple filters can be included in a request.
@@ -40,34 +39,67 @@ The filter mechanism only supports equality operations.
 
 Return a list of projects that allow public participation, along with protocols
 
-> /api/query/projects
+> /api/metadata/projects?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 
 ### Protocol Details ###
 
+> /api/metadata/protocols?token=asdfasdf
 
-> /api/query/protocols
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### Project Protocols ###
 
+> /api/metadata/projectProtocola?token=asdfasdf
 
-> /api/query/projectProtocols
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### Project Provinces ###
 
-> /api/query/projectProvinces
+> /api/metadata/projectProvinces?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### Project Sites ###
 
-> /api/query/projectSites
+> /api/metadata/projectSites?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### Protocol Species ###
 
-> /api/query/protocolSpecies
+> /api/metadata/protocolSpecies?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### User Projects ###
 
-> /api/query/userProjects
+> /api/metadata/entryPoint?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### User Profile ###
 
@@ -75,20 +107,31 @@ Return a list of projects that allow public participation, along with protocols
 
 ### Sites ###
 
-> /api/query/sites
+> /api/metadata/sites?token=asdfasdf
 
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
 
-## Lookup Table Downloads ##
 
 
 
 ### Breeding Codes ###
 
-> /api/query/breedingCodes
+> /api/metadata/breeding_codes?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
+
 
 ### Provinces ###
 
-> /api/query/provinces
+> /api/metadata/provinces?token=asdfasdf
+
+| Parameter Name | Type | Required |Explanation |
+|----------------|------|----------|------------|
+|token|String|Yes|The user's token, returned by the authentication mechanism|
 
 ### Regions ###
 
