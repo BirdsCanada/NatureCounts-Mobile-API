@@ -13,8 +13,9 @@ A basic data query looks like this (sandbox server is the only current host supp
 
 ## Registration, Authentication ##
 
-Where authemtication is needed, queries must include a token parameter. The token is obtained via the authentication mechanism built for the 
-NatureCounts R-client API.
+Where authentication is needed, queries must include a token parameter. The token is obtained via the authentication mechanism desribed below.
+
+
 
 
 
@@ -63,13 +64,12 @@ n/a
 
 
 Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
-for a complete forced refresh. The dataVersion parameter returned by the first entry point below should be
-checked against a stpred value: if this parameter value cahnges, a complete refresh of Reference Data is in order.
+for a complete forced refresh. The `data_version` parameter returned by the first entry point below should be
+checked against a stored value: if this parameter value cahnges, a complete refresh of Reference Data is in order.
 
-All Reference data results are returned as JSON objects, structured as 'data frames'. The query result columns (fields) occur
+Reference data results are returned as JSON objects, mostly structured as 'data frames'. The query result columns (fields) occur
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
-query records can be constructed by combining the vectore values across all attributes in the JSON object.
-
+query records can be constructed by combining the vector values across all attributes in the JSON object.
 
 Certain Reference Data queries require a user authentication token parameter, and additional
 filtering parameters are used on some of the queries (see below).
@@ -131,6 +131,9 @@ Authenticated: No
 Return a list of projects that allow public participation, along with protocols
 
 > /api/metadata/projects_metadata
+
+Authenticated: No
+
 
 
 ### Protocols ###
