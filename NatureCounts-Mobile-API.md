@@ -57,7 +57,7 @@ as attribute names within the JSON object, and the values of each attribute is a
 query records can be constructed by combining the vectore values across all attributes in the JSON object.
 
 
-A basic data query looks like this:
+A basic data query looks like this (sandbox server is the only current host supporting the api):
 
 > https://sandbox.birdscanada.org/api/....
 
@@ -65,149 +65,40 @@ Certain Reference Data queries require a user authentication token parameter, an
 filtering parameters are used on some of the queries (see below).
 
 
+
+### Data and API Version ###
+
+Returns appi and data version attributes.
+
+> /api/mobile/dataVersion
+
+Authenticated: No
+
+**Return JSON attributes:**
+
+| Attribute | Notes |
+| --------- | ----- |
+| api_version | The API version will normaly not change, but may be used in future to signal stale Mobile App version |
+| data_version | If this attribute changes, all cached Reference data should be updated before the use interacts with the App |
+
+
+
+
+
 ### Breeding Codes ###
 
 Returns a list of breeding evidence codes.
 
-> https://sandbox.birdscanada.org/api/metadata/breeding_codes
+> /api/metadata/breeding_codes
 
 Authenticated: No
 
 
-### Projects ###
-
-Return a list of projects that allow public participation, along with protocols
-
-> /api/metadata/projects?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-
-### Protocol Details ###
-
-> /api/metadata/protocols?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### Project Protocols ###
-
-> /api/metadata/projectProtocola?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### Project Provinces ###
-
-> /api/metadata/projectProvinces?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### Project Sites ###
-
-> /api/metadata/projectSites?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### Protocol Species ###
-
-> /api/metadata/protocolSpecies?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### User Projects ###
-
-> /api/metadata/entryPoint?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-### User Profile ###
-
-> /api/query/userProfile
-
-### Sites ###
-
-> /api/metadata/sites?token=asdfasdf
-
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
-
-
-
-
-
-
 ### Provinces ###
 
-> /api/metadata/provinces?token=asdfasdf
+Returns a list of Canadian Provinces:
 
-| Parameter Name | Type | Required |Explanation |
-|----------------|------|----------|------------|
-|token|String|Yes|The user's token, returned by the authentication mechanism|
+> /api/metadata/provinces
 
-### Regions ###
+Authenticated: No
 
-> /api/query/regions
-
-### Species ###
-
-> /api/query/species
-
-### Species Codes ###
-
-> /api/query/speciesCodes
-
-
-### Species Groups ###
-
-> /api/query/speciesGroups
-
-### Invalid breeding Codes ###
-
-> /api/query/????????????
-
-### Species Ebird ###
-
-> /api/query/ebird
-
-### Species Ebird Limits ###
-
-> /api/query/ebirdLimits
-
-### Species Provinces ###
-
-> /api/query/speciesProvinces
-
-### Species Regions ###
-
-> /api/query/speciesRegions
-
-## Data Submission #
-
-HTTP POST.
-
-### Add a Site ###
-
-
-
-### Submit Observations ###
