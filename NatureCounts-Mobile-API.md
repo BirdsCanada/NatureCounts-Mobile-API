@@ -5,10 +5,26 @@ This set of entrypoints is designed to serve the needs of NatureCounts mobile ap
 All queries are over HTTPS GET requests. Query responses are JSON object, mostly structured as a 'data frame': attribute names are the data
 field names, and attribute values are vectors of field values.
 
+A basic data query looks like this (sandbox server is the only current host supporting the api):
+
+> https://sandbox.birdscanada.org/api/....
+
+
+
 ## Registration, Authentication ##
 
 Where authemtication is needed, queries must include a token parameter. The token is obtained via the authentication mechanism built for the 
 NatureCounts R-client API.
+
+
+
+### User Registration ###
+
+Currently by web
+
+https://www.birdscanada.org/birdmon/default/register.jsp
+
+
 
 ### Authentication ###
 
@@ -31,16 +47,14 @@ Required parameter: **password** - the account password
 
 >**Example Response:** {"token":"1234567890qwerty,"api_version":"2019.01"}
 
+Note that the api_version attribute can be used to validate future versions of the Mobile App.
 
-### User Registration ###
-
-
-
-### User Signin ###
 
 
 
 ### Project Registration / De-registration ###
+
+n/a
 
 
 
@@ -56,10 +70,6 @@ All Reference data results are returned as JSON objects, structured as 'data fra
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
 query records can be constructed by combining the vectore values across all attributes in the JSON object.
 
-
-A basic data query looks like this (sandbox server is the only current host supporting the api):
-
-> https://sandbox.birdscanada.org/api/....
 
 Certain Reference Data queries require a user authentication token parameter, and additional
 filtering parameters are used on some of the queries (see below).
@@ -101,4 +111,36 @@ Returns a list of Canadian Provinces:
 > /api/metadata/provinces
 
 Authenticated: No
+
+**Note: this currently returns states outside Canada.**
+
+
+### Species Codes ###
+
+Returns a list of BBS Species Codes:
+
+> /api/metadata/species_codes?authority=BBS
+
+Authenticated: No
+
+**Note: this is a sample and entrypoint will change to better meet the App requirement.**
+
+
+### Projects Metadata ###
+
+Return a list of projects that allow public participation, along with protocols
+
+> /api/metadata/projects_metadata
+
+
+### Protocols ###
+
+Returns a list of Protocols:
+
+> /api/metadata/protocols
+
+Authenticated: No
+
+
+
 
