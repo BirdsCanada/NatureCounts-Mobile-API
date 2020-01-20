@@ -62,7 +62,7 @@ n/a
 
 Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
 for a complete forced refresh. The `data_version` parameter returned by the first entry point below should be
-checked against a stored value: if this parameter value cahnges, a complete refresh of Reference Data is in order.
+checked against a stored value: if this parameter value changes, a complete refresh of Reference Data is in order.
 
 Reference data results are returned as JSON objects, mostly structured as 'data frames'. The query result columns (fields) occur
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
@@ -86,7 +86,7 @@ Authenticated: No
 | Attribute | Notes |
 | --------- | ----- |
 | api_version | The API version will normaly not change, but may be used in future to signal stale Mobile App version |
-| data_version | If this attribute changes, all cached Reference data should be updated before the use interacts with the App |
+| data_version | If this attribute changes, all cached Reference data should be updated before the user interacts with the App |
 
 
 
@@ -125,7 +125,7 @@ Authenticated: No
 
 ### Projects Metadata ###
 
-Return a list of projects that allow public participation, along with protocols
+Return a list of projects that allow public participation
 
 > /api/metadata/projects_metadata
 
