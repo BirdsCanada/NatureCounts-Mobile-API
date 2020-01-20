@@ -10,11 +10,39 @@ field names, and attribute values are vectors of field values.
 Where authemtication is needed, queries must include a token parameter. The token is obtained via the authentication mechanism built for the 
 NatureCounts R-client API.
 
+### Authentication ###
+
+The API controls collection data access using a token that is generated when a user authenticates.
+The token has a limited life span (currently 20 days), so the client application should require user authentication 
+for each new session. Authentication is based on [NatureCounts login](https://www.birdscanada.org/birdmon/default/register.jsp).
+Registration is free.
+
+A user may hold multiple valid tokens at a time, allowing them to work from more than one session (or device) at once.
+
+This entrypoint requires a login username and password, and if valid, returns a JSON object carrying
+a token with a 20 day validity period, as well as the current api_version designation (String).
+The client application can then present the token as user credentials in the data access entry points, where applicable.
+
+Required parameter: **username** - the account username
+
+Required parameter: **password** - the account password
+
+>**Example URL:** /api/data/authenticate?username=asdfasdf&password=qwerty
+
+>**Example Response:** {"token":"1234567890qwerty,"api_version":"2019.01"}
+
+
 ### User Registration ###
+
+
 
 ### User Signin ###
 
+
+
 ### Project Registration / De-registration ###
+
+
 
 
 ## Lookup Data Querying ##
@@ -179,3 +207,4 @@ HTTP POST.
 
 
 ### Submit Observations ###
+
