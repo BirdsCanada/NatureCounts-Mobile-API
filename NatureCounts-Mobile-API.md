@@ -114,9 +114,9 @@ Authenticated: No
 
 ### Species Codes ###
 
-Returns a list of BBS Species Codes:
+Returns a list of EBIRD Species Codes:
 
-> /api/metadata/species_codes?authority=BBS
+> /api/metadata/species_codes?authority=EBIRD1.05
 
 Authenticated: No
 
