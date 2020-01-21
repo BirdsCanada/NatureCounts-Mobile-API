@@ -57,7 +57,7 @@ Note that the api_version attribute can be used to validate future versions of t
 
 Returns the profile asocaited with the token.
 
-> /api/mobile/user?token-asdfasdf
+> /api/mobile/user?token=asdfasdf
 
 Authenticated: Yes
 
@@ -65,9 +65,9 @@ Authenticated: Yes
 
 | Attribute | Notes |
 | --------- | ----- |
-| loginName | The login name |
-| lastName | The surname |
-| firstName | The firstname |
+| login_name | The login name |
+| last_name | The surname |
+| first_name | The firstname |
 | email | The email address |
 
 
@@ -75,7 +75,7 @@ Authenticated: Yes
 
 ### Data and API Version ###
 
-Returns appi and data version attributes.
+Returns api and data version attributes.
 
 > /api/mobile/dataVersion
 
@@ -105,14 +105,14 @@ Not available yet
 
 
 Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
-for a complete forced refresh. The `data_version` parameter returned by the first entry point below should be
-checked against a stored value: if this parameter value changes, a complete refresh of Reference Data is in order.
+for a complete forced refresh. The `data_version` parameter returned by the `/api/mobile/dataVersion` entrypint should be
+checked against a stored value: if this value changes, a complete refresh of Reference Data is in order.
 
 Reference data results are returned as JSON objects, mostly structured as 'data frames'. The query result columns (fields) occur
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
 query records can be constructed by combining the vector values across all attributes in the JSON object.
 
-Certain Reference Data queries require a user authentication token parameter, and additional
+All Reference Data queries require a user authentication token parameter, and additional
 filtering parameters are used on some of the queries (see below).
 
 
@@ -210,7 +210,7 @@ Returns a list of species groups:
 Authenticated: Yes
 
 
-### Species RBIRD Codes ###
+### Species EBIRD Codes ###
 
 Returns a list of codes from the EBIRD checklist:
 
@@ -242,6 +242,9 @@ Returns a list of Protocols:
 > /api/mobile/breedingCodes?token=asdfasdf&lang=EN
 
 Authenticated: No
+
+
+
 
 
 
