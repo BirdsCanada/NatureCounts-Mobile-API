@@ -239,7 +239,7 @@ Authenticated: Yes
 
 Returns a list of Protocols:
 
-> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
+> /api/mobile/protocols?token=asdfasdf&lang=EN
 
 Authenticated: No
 
