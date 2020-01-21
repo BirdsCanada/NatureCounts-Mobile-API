@@ -5,12 +5,16 @@ This set of entrypoints is designed to serve the needs of NatureCounts mobile ap
 All queries are over HTTPS GET requests. Query responses are JSON object, mostly structured as a 'data frame': attribute names are the data
 field names, and attribute values are vectors of field values.
 
+A basic data query looks like this (sandbox server is the only current host supporting the api):
+
+> https://sandbox.birdscanada.org/api/....
 
 
 
 ## Registration, Authentication ##
 
-Where authentication is needed, queries must include a token parameter. The token is obtained via the authentication mechanism desribed below.
+Where user identification is required, queries must include a token parameter.
+The token is obtained via the authentication mechanism desribed below.
 
 
 
@@ -48,11 +52,51 @@ Required parameter: **password** - the account password
 Note that the api_version attribute can be used to validate future versions of the Mobile App.
 
 
+### User Profile ###
+
+
+Returns the profile asocaited with the token.
+
+> /api/mobile/user?token-asdfasdf
+
+Authenticated: Yes
+
+**Return JSON attributes:**
+
+| Attribute | Notes |
+| --------- | ----- |
+| loginName | The login name |
+| lastName | The surname |
+| firstName | The firstname |
+| email | The email address |
+
+
+
+
+### Data and API Version ###
+
+Returns appi and data version attributes.
+
+> /api/mobile/dataVersion
+
+Authenticated: No
+
+**Return JSON attributes:**
+
+| Attribute | Notes |
+| --------- | ----- |
+| api_version | The API version will normally not change, but may be used in future to signal stale Mobile App version |
+| data_version | If this attribute changes, all cached Reference data should be updated before the user interacts with the App |
+
+
+
+
+
 
 
 ### Project Registration / De-registration ###
 
-n/a
+Not available yet
 
 
 
@@ -73,63 +117,121 @@ filtering parameters are used on some of the queries (see below).
 
 
 
-### Data and API Version ###
 
-Returns appi and data version attributes.
+### Projects ###
 
-> /api/mobile/dataVersion
+Return a list of projects:
 
-Authenticated: No
+> /api/mobile/projects?token=asdfasdf&lang=EN
 
-**Return JSON attributes:**
-
-| Attribute | Notes |
-| --------- | ----- |
-| api_version | The API version will normaly not change, but may be used in future to signal stale Mobile App version |
-| data_version | If this attribute changes, all cached Reference data should be updated before the user interacts with the App |
-
-
-
-
-
-### Breeding Codes ###
-
-Returns a list of breeding evidence codes.
-
-> /api/metadata/breeding_codes
-
-Authenticated: No
+Authenticated: Yes
 
 
 ### Provinces ###
 
 Returns a list of Canadian Provinces:
 
-> /api/metadata/provinces
+> /api/mobile/provinces?token=asdfasdf&lang=EN
 
-Authenticated: No
+Authenticated: Yes
 
-**Note: this currently returns states outside Canada.**
+
+
+
+### Projects Provinces ###
+
+Return a list of provinces associated with projects:
+
+> /api/mobile/projectsProvinces?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
+### Regions ###
+
+Returns a list of region:
+
+> /api/mobile/regions?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
+### User Projects ###
+
+
+Returns the projects to which the user is registered, along with a status.
+
+> /api/mobile/userProjects?token-asdfasdf
+
+Authenticated: Yes
+
+
+
 
 
 ### Species Codes ###
 
 Returns a list of EBIRD Species Codes:
 
-> /api/metadata/species_codes?authority=EBIRD1.05
+> /api/mobile/speciesCodes?token=asdfasdf&lang=EN
 
-Authenticated: No
-
-**Note: this is a sample and entrypoint will change to better meet the App requirement.**
+Authenticated: Yes
 
 
-### Projects Metadata ###
 
-Return a list of projects that allow public participation
+### Breeding Codes ###
 
-> /api/metadata/projects_metadata
+Returns a list of breeding evidence codes:
 
-Authenticated: No
+> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
+### Species ###
+
+Returns a list of species:
+
+> /api/mobile/species?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
+### Species Groups ###
+
+Returns a list of species groups:
+
+> /api/mobile/speciesGroups?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+### Species RBIRD Codes ###
+
+Returns a list of codes from the EBIRD checklist:
+
+> /api/mobile/speciesEbird?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
+
+
+### Species Invalid Breeding Evidence Codes ###
+
+Returns a list of invalid breeding evidence codes for species:
+
+> /api/mobile/speciesInvalidBreedingEvidence?token=asdfasdf&lang=EN
+
+Authenticated: Yes
+
+
+
 
 
 
@@ -137,7 +239,7 @@ Authenticated: No
 
 Returns a list of Protocols:
 
-> /api/metadata/protocols
+> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
 
 Authenticated: No
 
