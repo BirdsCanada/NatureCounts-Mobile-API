@@ -11,7 +11,20 @@ A basic data query looks like this (sandbox server is the only current host supp
 
 
 
-## Registration, Authentication ##
+### Table of Contents ###
+
+1. [Authentication and User Profile](#metadata-functions)
+	1. [Registration](#registration)
+	2. [Authentication](#authentication)
+	3. [User Profile](#profile)
+	4. [Project Registration](#project-registration)
+2. [API and Data Version](#api-data-version)
+3. [Errors](#errors)
+4. [Reference Data](#reference-data)
+5. [Data Submission](#data-submission)
+
+
+## Authentication and User Profile ##
 
 Where user identification is required, queries must include a token parameter.
 The token is obtained via the authentication mechanism desribed below.
@@ -73,7 +86,16 @@ Authenticated: Yes
 
 
 
-### Data and API Version ###
+
+### Project Registration / De-registration ###
+
+Not available yet
+
+
+
+
+
+## Data and API Version ##
 
 Returns api and data version attributes.
 
@@ -91,17 +113,21 @@ Authenticated: No
 
 
 
+## Errors ##
 
+Errors generated in the API will result in a JSON encoded error structure,
+returned with an appropriate HTTP error status. A typical structure is shown below.
 
+You may retrieve the current error codes and messages with the following entrypoint.
 
-### Project Registration / De-registration ###
+> /api/mobile/errorCodes?token=asdfasdf
 
-Not available yet
 
 
 
 
 ## Reference Data ##
+
 
 
 Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
@@ -115,6 +141,13 @@ query records can be constructed by combining the vector values across all attri
 All Reference Data queries require a user authentication token parameter, and additional
 filtering parameters are used on some of the queries (see below).
 
+**Common Parameters**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The authentication token |
+| lang | String | No | a 2-letter language code, deafulting to EN |
+
 
 
 
@@ -124,7 +157,7 @@ Return a list of projects:
 
 > /api/mobile/projects?token=asdfasdf&lang=EN
 
-Authenticated: Yes
+
 
 
 ### Provinces ###
@@ -133,7 +166,6 @@ Returns a list of Canadian Provinces:
 
 > /api/mobile/provinces?token=asdfasdf&lang=EN
 
-Authenticated: Yes
 
 
 
@@ -154,7 +186,6 @@ Returns a list of region:
 
 > /api/mobile/regions?token=asdfasdf&lang=EN
 
-Authenticated: Yes
 
 
 
@@ -163,9 +194,7 @@ Authenticated: Yes
 
 Returns the projects to which the user is registered, along with a status.
 
-> /api/mobile/userProjects?token-asdfasdf
-
-Authenticated: Yes
+> /api/mobile/userProjects?token=asdfasdf&lang=EN	
 
 
 
@@ -177,7 +206,7 @@ Returns a list of EBIRD Species Codes:
 
 > /api/mobile/speciesCodes?token=asdfasdf&lang=EN
 
-Authenticated: Yes
+
 
 
 
@@ -187,8 +216,6 @@ Returns a list of breeding evidence codes:
 
 > /api/mobile/breedingCodes?token=asdfasdf&lang=EN
 
-Authenticated: Yes
-
 
 
 ### Species ###
@@ -196,8 +223,6 @@ Authenticated: Yes
 Returns a list of species:
 
 > /api/mobile/species?token=asdfasdf&lang=EN
-
-Authenticated: Yes
 
 
 
@@ -207,17 +232,12 @@ Returns a list of species groups:
 
 > /api/mobile/speciesGroups?token=asdfasdf&lang=EN
 
-Authenticated: Yes
-
-
+ 
 ### Species EBIRD Codes ###
 
 Returns a list of codes from the EBIRD checklist:
 
 > /api/mobile/speciesEbird?token=asdfasdf&lang=EN
-
-Authenticated: Yes
-
 
 
 
@@ -228,24 +248,151 @@ Returns a list of invalid breeding evidence codes for species:
 
 > /api/mobile/speciesInvalidBreedingEvidence?token=asdfasdf&lang=EN
 
-Authenticated: Yes
-
-
-
-
-
 
 ### Protocols ###
 
-Returns a list of Protocols:
+Returns Protocols associated with a project:
 
-> /api/mobile/protocols?token=asdfasdf&lang=EN
-
-Authenticated: No
+> /api/mobile/protocols?token=asdfasdf&lang=EN&projectId=1007
 
 
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+
+
+
+### Project Protocols ###
+
+Returns protocol details associated with a project:
+
+> /api/mobile/projectProtocols?token=asdfasdf&lang=EN&projectId=1007
+
+
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+
+
+
+
+### Protocol Species ###
+
+Returns species appropriate for a specific protocol:
+
+> /api/mobile/protocolsSpecies?token=asdfasdf&lang=EN&protocolId=95
+
+
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| protocolId | Integer | Yes | A protocol ID |
 
 
 
 
 
+### Species Province ###
+
+Returns species appropriate for a province:
+
+> /api/mobile/speciesProvince?token=asdfasdf&lang=EN&province=ON
+
+
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| province | String | Yes | A 2-letter province code |
+
+
+
+### Species Region ###
+
+Returns species appropriate for a region within a province:
+
+> /api/mobile/speciesRegion?token=asdfasdf&lang=EN&province=ON&regionId=15
+
+=====================================================
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| province | String | Yes | A 2-letter province code |
+| regionId | Integer | Yes | A region ID |
+
+
+
+### Sites Coordinates ###
+
+Returns information about project sites within a bounding box:
+
+> /api/mobile/sitesCoordinates?token=asdfasdf&lang=EN&province=ON&regionId=15
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| locType | String | Yes | A location type (e.g.: EBIRD) |
+| swLat | Float | Yes | The decimal latitude of the south-west corner of the bounding box |
+| swLon | Float | Yes | The decimal longitude of the south-west corner of the bounding box |
+| neLat | Float | Yes | The decimal latitude of the north-east corner of the bounding box |
+| neLon | Float | Yes | The decimal longitude of the north-east corner of the bounding box |
+
+
+
+
+
+### Sites Regions ###
+
+Returns information about project sites within a region:
+
+> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&province=ON&regionId=15
+
+
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| locType | String | Yes | A location type (e.g.: EBIRD) |
+| province | String | Yes | A 2-letter province code |
+| regionId | Integer | Yes | A region ID |
+
+
+
+
+### Sites Squares ###
+
+Returns information about sites within a specific UTM square:
+
+> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
+
+
+
+**Additional Parameter(s):**
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| locType | String | Yes | A location type (e.g.: EBIRD) |
+{ utmSquare | String | Yesy | A utm square identifier |
+
+
+
+
+
+## Data Submission #
+
+Submissions will be by HTTP POST. Entrypoints are not yet available.
+
+
+
+### Add a Site ###
+
+
+
+### Submit Observations ###
