@@ -13,12 +13,11 @@ A basic data query looks like this (sandbox server is the only current host supp
 
 ### Table of Contents ###
 
-1. [Authentication and User Profile](#metadata-functions)
-	1. [Registration](#registration)
-	2. [Authentication](#authentication)
-	3. [User Profile](#profile)
-	4. [Project Registration](#project-registration)
-2. [API and Data Version](#api-data-version)
+1. [Authentication and User Profile](#authentication-and-user-profile)
+	1. [Authentication](#authentication)
+	2. [User Profile](#user-profile)
+	3. [Project Registration](#project-registration)
+2. [API and Data Version](#api-and-data-version)
 3. [Errors](#errors)
 4. [Reference Data](#reference-data)
 5. [Data Submission](#data-submission)
@@ -26,33 +25,26 @@ A basic data query looks like this (sandbox server is the only current host supp
 
 ## Authentication and User Profile ##
 
-Where user identification is required, queries must include a token parameter.
-The token is obtained via the authentication mechanism desribed below.
+User identification is accomplished by including a token as a request paramter. The
+procedure to obtain a token is described below.
 
+Note that user registration a supported through the website form available here:
 
+[https://www.birdscanada.org/birdmon/default/register.jsp](https://www.birdscanada.org/birdmon/default/register.jsp)
 
-
-
-### User Registration ###
-
-Currently by web
-
-https://www.birdscanada.org/birdmon/default/register.jsp
-
+Registration is free.
 
 
 ### Authentication ###
 
-The API controls collection data access using a token that is generated when a user authenticates.
-The token has a limited life span (currently 20 days), so the client application should require user authentication 
-for each new session. Authentication is based on [NatureCounts login](https://www.birdscanada.org/birdmon/default/register.jsp).
-Registration is free.
+The API controls data access and submission using a token with a limited life span (currently 20 days).
+Authentication is based on [NatureCounts login](https://www.birdscanada.org/birdmon/default/register.jsp).
 
 A user may hold multiple valid tokens at a time, allowing them to work from more than one session (or device) at once.
 
 This entrypoint requires a login username and password, and if valid, returns a JSON object carrying
-a token with a 20 day validity period, as well as the current api_version designation (String).
-The client application can then present the token as user credentials in the data access entry points, where applicable.
+a token with a 20 day validity period, as well as the current `api_version` designation (String).
+The client application then presents the token as user credentials in all subsequent entrypoints.
 
 Required parameter: **username** - the account username
 
@@ -68,11 +60,10 @@ Note that the api_version attribute can be used to validate future versions of t
 ### User Profile ###
 
 
-Returns the profile asocaited with the token.
+Returns the profile associated with the token.
 
 > /api/mobile/user?token=asdfasdf
 
-Authenticated: Yes
 
 **Return JSON attributes:**
 
@@ -87,15 +78,15 @@ Authenticated: Yes
 
 
 
-### Project Registration / De-registration ###
+### Project Registration ###
 
-Not available yet
-
-
+**Not available yet (2020-01-23)**
 
 
 
-## Data and API Version ##
+
+
+## API and Data Version ##
 
 Returns api and data version attributes.
 
@@ -110,7 +101,10 @@ Authenticated: No
 | api_version | The API version will normally not change, but may be used in future to signal stale Mobile App version |
 | data_version | If this attribute changes, all cached Reference data should be updated before the user interacts with the App |
 
+The `api_version` value can be used in future to validate Mobile App verson compatibility.
 
+The `data_version` parameter should be stored and then used to signal that a cached data refresh is required. If the `data_version`
+has changed, then all reference data should be updated. This will not occur frequently.
 
 
 ## Errors ##
@@ -122,7 +116,7 @@ You may retrieve the current error codes and messages with the following entrypo
 
 > /api/mobile/errorCodes?token=asdfasdf
 
-
+**(This entrypoint is not yet supported - 2020-01-23)**
 
 
 
@@ -131,29 +125,31 @@ You may retrieve the current error codes and messages with the following entrypo
 
 
 Reference data should be cached locally in the app, with a provision for periodic updates (weekely, etc?) and
-for a complete forced refresh. The `data_version` parameter returned by the `/api/mobile/dataVersion` entrypint should be
+for a complete forced refresh. The `data_version` parameter returned by the `/api/mobile/dataVersion` entrypoint above should be
 checked against a stored value: if this value changes, a complete refresh of Reference Data is in order.
 
-Reference data results are returned as JSON objects, mostly structured as 'data frames'. The query result columns (fields) occur
+Reference data are returned as JSON objects, structured as 'data frames'. The query result columns (fields) occur
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
 query records can be constructed by combining the vector values across all attributes in the JSON object.
 
-All Reference Data queries require a user authentication token parameter, and additional
-filtering parameters are used on some of the queries (see below).
+**This format can be changed easily to instead return a more traditional array of JSON objectS.**
+
+All Reference Data queries require a user authentication `token` parameter, and may include a `lang` 
+parameter. If the `lang` paramter is not provided, it will default to `EN`.
 
 **Common Parameters**
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The authentication token |
-| lang | String | No | a 2-letter language code, deafulting to EN |
+| lang | String | No | a 2-letter language code, defaulting to EN |
 
 
 
 
 ### Projects ###
 
-Return a list of projects:
+Return a list of all projects relevant to the mobile app:
 
 > /api/mobile/projects?token=asdfasdf&lang=EN
 
@@ -162,7 +158,7 @@ Return a list of projects:
 
 ### Provinces ###
 
-Returns a list of Canadian Provinces:
+Returns a list of Canadian Provinces with their 2-letter codes:
 
 > /api/mobile/provinces?token=asdfasdf&lang=EN
 
@@ -172,17 +168,17 @@ Returns a list of Canadian Provinces:
 
 ### Projects Provinces ###
 
-Return a list of provinces associated with projects:
+Return a list of provinces associated with all projects:
 
 > /api/mobile/projectsProvinces?token=asdfasdf&lang=EN
 
-Authenticated: Yes
+
 
 
 
 ### Regions ###
 
-Returns a list of region:
+Returns a list of regions with their region ID's:
 
 > /api/mobile/regions?token=asdfasdf&lang=EN
 
@@ -200,21 +196,8 @@ Returns the projects to which the user is registered, along with a status.
 
 
 
-### Species Codes ###
-
-Returns a list of EBIRD Species Codes:
-
-> /api/mobile/speciesCodes?token=asdfasdf&lang=EN
 
 
-
-
-
-### Breeding Codes ###
-
-Returns a list of breeding evidence codes:
-
-> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
 
 
 
@@ -233,12 +216,26 @@ Returns a list of species groups:
 > /api/mobile/speciesGroups?token=asdfasdf&lang=EN
 
  
+### Species Codes ###
+
+Returns a list of 4-letter Species Codes:
+
+> /api/mobile/speciesCodes?token=asdfasdf&lang=EN
+
+
+
 ### Species EBIRD Codes ###
 
-Returns a list of codes from the EBIRD checklist:
+Returns a list of species codes from the EBIRD checklist:
 
 > /api/mobile/speciesEbird?token=asdfasdf&lang=EN
 
+
+### Breeding Codes ###
+
+Returns a list of breeding evidence codes:
+
+> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
 
 
 
@@ -249,32 +246,38 @@ Returns a list of invalid breeding evidence codes for species:
 > /api/mobile/speciesInvalidBreedingEvidence?token=asdfasdf&lang=EN
 
 
-### Protocols ###
-
-Returns Protocols associated with a project:
-
-> /api/mobile/protocols?token=asdfasdf&lang=EN&projectId=1007
-
-
-**Additional Parameter(s):**
-| Parameter | Type | Required | Notes |
-| --------- | ---- | -------- | ----- |
-| projectId | Integer | Yes | A project ID |
-
-
 
 ### Project Protocols ###
 
-Returns protocol details associated with a project:
+Returns protocol ID's associated with a project:
 
 > /api/mobile/projectProtocols?token=asdfasdf&lang=EN&projectId=1007
 
 
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
+
+
+### Protocol ###
+
+Returns information on a specific protocol associated with a project:
+
+> /api/mobile/protocols?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
+
+
+
 
 
 
@@ -288,6 +291,7 @@ Returns species appropriate for a specific protocol:
 
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | protocolId | Integer | Yes | A protocol ID |
@@ -296,7 +300,7 @@ Returns species appropriate for a specific protocol:
 
 
 
-### Species Province ###
+### Province Species ###
 
 Returns species appropriate for a province:
 
@@ -305,6 +309,7 @@ Returns species appropriate for a province:
 
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | province | String | Yes | A 2-letter province code |
@@ -317,9 +322,9 @@ Returns species appropriate for a region within a province:
 
 > /api/mobile/speciesRegion?token=asdfasdf&lang=EN&province=ON&regionId=15
 
-=====================================================
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | province | String | Yes | A 2-letter province code |
@@ -327,13 +332,14 @@ Returns species appropriate for a region within a province:
 
 
 
-### Sites Coordinates ###
+### Sites by Coordinates ###
 
 Returns information about project sites within a bounding box:
 
 > /api/mobile/sitesCoordinates?token=asdfasdf&lang=EN&province=ON&regionId=15
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
@@ -347,7 +353,7 @@ Returns information about project sites within a bounding box:
 
 
 
-### Sites Regions ###
+### Sites by Regions ###
 
 Returns information about project sites within a region:
 
@@ -356,6 +362,7 @@ Returns information about project sites within a region:
 
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
@@ -375,6 +382,7 @@ Returns information about sites within a specific UTM square:
 
 
 **Additional Parameter(s):**
+
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
