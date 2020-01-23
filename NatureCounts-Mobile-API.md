@@ -132,7 +132,7 @@ Reference data are returned as JSON objects, structured as 'data frames'. The qu
 as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
 query records can be constructed by combining the vector values across all attributes in the JSON object.
 
-**This format can be changed easily to instead return a more traditional array of JSON objectS.**
+**This format can be changed easily to instead return a more traditional array of JSON objects.**
 
 All Reference Data queries require a user authentication `token` parameter, and may include a `lang` 
 parameter. If the `lang` paramter is not provided, it will default to `EN`.
@@ -377,7 +377,7 @@ Returns information about project sites within a region:
 
 Returns information about sites within a specific UTM square:
 
-> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
+> /api/mobile/sitesSquares?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
 
 
 
@@ -387,7 +387,25 @@ Returns information about sites within a specific UTM square:
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
 | locType | String | Yes | A location type (e.g.: EBIRD) |
-{ utmSquare | String | Yesy | A utm square identifier |
+| utmSquare | String | Yesy | A utm square identifier |
+
+
+
+
+### Find a Square ###
+
+Find a UTM square from a decimal longitude and latitude:
+
+> /api/mobile/findSquare?token=asdfasdf&lang=EN&lon=-76.5050&lat=44.7366
+
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| lon | Float | Yes | A decimal longitude |
+| lat | Float | Yes | A decimal latitude |
 
 
 
