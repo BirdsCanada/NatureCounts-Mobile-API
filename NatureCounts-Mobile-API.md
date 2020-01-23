@@ -110,11 +110,20 @@ has changed, then all reference data should be updated. This will not occur freq
 ## Errors ##
 
 Errors generated in the API will result in a JSON encoded error structure,
-returned with an appropriate HTTP error status. A typical structure is shown below.
+returned with an appropriate HTTP error status. 
+
+**Return JSON attributes:**
+
+| Attribute | Notes |
+| --------- | ----- |
+| entryPoint | The api entry point that was queried |
+| error | An http error code: also present as the response 'Status Code' |
+| errorMsg | Textual error message |
 
 You may retrieve the current error codes and messages with the following entrypoint.
 
 > /api/mobile/errorCodes?token=asdfasdf
+
 
 **(This entrypoint is not yet supported - 2020-01-23)**
 
