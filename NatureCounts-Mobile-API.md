@@ -118,14 +118,11 @@ returned with an appropriate HTTP error status.
 | --------- | ----- |
 | entryPoint | The api entry point that was queried |
 | error | An http error code: also present as the response 'Status Code' |
-| errorMsg | Textual error message |
+| errorMsgs | An array of textual error message(s), detailing the condition |
 
 You may retrieve the current error codes and messages with the following entrypoint.
 
 > /api/mobile/errorCodes?token=asdfasdf
-
-
-**(This entrypoint is not yet supported - 2020-01-23)**
 
 
 
