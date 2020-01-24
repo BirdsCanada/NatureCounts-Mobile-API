@@ -2,21 +2,22 @@
 
 This set of entrypoints is designed to serve the needs of NatureCounts mobile app.
 
-All queries are over HTTPS GET requests. Query responses are JSON object, mostly structured as a 'data frame': attribute names are the data
+All queries are over HTTPS  as either GET or POST requests. Query responses are JSON object,
+mostly structured as a 'data frame': attribute names are the data
 field names, and attribute values are vectors of field values.
 
-A basic data query looks like this (sandbox server is the only current host supporting the api):
+Use the following host to test against the current sandbox environment:
 
-> https://sandbox.birdscanada.org/api/....
+> https://sandbox.birdscanada.org
 
 
 
 ### Table of Contents ###
 
 1. [Authentication and User Profile](#authentication-and-user-profile)
-	1. [Authentication](#authentication)
-	2. [User Profile](#user-profile)
-	3. [Project Registration](#project-registration)
+	2. [Authentication](#authentication)
+	3. [User Profile](#user-profile)
+	4. [Project Registration](#project-registration)
 2. [API and Data Version](#api-and-data-version)
 3. [Errors](#errors)
 4. [Reference Data](#reference-data)
@@ -25,10 +26,10 @@ A basic data query looks like this (sandbox server is the only current host supp
 
 ## Authentication and User Profile ##
 
-User identification is accomplished by including a token as a request paramter. The
+User identification is accomplished by including a token as a request parameter. The
 procedure to obtain a token is described below.
 
-Note that user registration a supported through the website form available here:
+Note that user registration is supported through the website form available here:
 
 [https://www.birdscanada.org/birdmon/default/register.jsp](https://www.birdscanada.org/birdmon/default/register.jsp)
 
@@ -44,7 +45,7 @@ A user may hold multiple valid tokens at a time, allowing them to work from more
 
 This entrypoint requires a login username and password, and if valid, returns a JSON object carrying
 a token with a 20 day validity period, as well as the current `api_version` designation (String).
-The client application then presents the token as user credentials in all subsequent entrypoints.
+The client application must then present the token as user credentials in subsequent entrypoints.
 
 Required parameter: **username** - the account username
 
@@ -148,7 +149,7 @@ parameter. If the `lang` paramter is not provided, it will default to `EN`.
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The authentication token |
-| lang | String | No | a 2-letter language code, defaulting to EN |
+| lang | String | No | A 2-letter language code, defaulting to EN |
 
 
 
@@ -268,9 +269,9 @@ Returns protocol ID's associated with a project:
 | projectId | Integer | Yes | A project ID |
 
 
-### Protocol ###
+### Protocol Details ###
 
-Returns information on a specific protocol associated with a project:
+Returns detailed information on a specific protocol associated with a project:
 
 > /api/mobile/protocols?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
 
@@ -379,7 +380,7 @@ Returns information about project sites within a region:
 
 
 
-### Sites Squares ###
+### Sites by Square ###
 
 Returns information about sites within a specific UTM square:
 
