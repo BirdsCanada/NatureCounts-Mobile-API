@@ -15,9 +15,9 @@ Use the following host to test against the current sandbox environment:
 ### Table of Contents ###
 
 1. [Authentication and User Profile](#authentication-and-user-profile)
-	2. [Authentication](#authentication)
-	3. [User Profile](#user-profile)
-	4. [Project Registration](#project-registration)
+	1. [Authentication](#authentication)
+	2. [User Profile](#user-profile)
+	3. [Project Registration](#project-registration)
 2. [API and Data Version](#api-and-data-version)
 3. [Errors](#errors)
 4. [Reference Data](#reference-data)
