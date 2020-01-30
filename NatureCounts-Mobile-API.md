@@ -22,6 +22,8 @@ Use the following host to test against the current sandbox environment:
 3. [Errors](#errors)
 4. [Reference Data](#reference-data)
 5. [Data Submission](#data-submission)
+	1. [Adding a station](#add-a-new-station)
+	2. [Checklist Submission](#checklist-submission)
 
 
 ## Authentication and User Profile ##
@@ -445,16 +447,28 @@ A checklist submission must be by http POST, with the following variables:
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| token | Stirng | Yes | The user's token |
+| token | String | Yes | The user's token |
 | projectId | Integer | Yes | A decimal project ID |
 | checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
+
+
+The response to a valid checklist submisson event:
+
+| Parameter | Type | Notes |
+| --------- | ---- | ----- |
+| statuus | String | Normally: 'success' |
+| recordId | Integer | The record ID, whether newly created or existing |
+
+
+The resonse to an invalid checklist submisson has not yet been defined......
+
 
 **The CHECKLIST_JSON structure:**
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | formId | Integer | No | Must be set when submitting an existing checklist; otherwise blank or null |
-| obsDate | String | Yes | The observation datae in ISO format (eg: 2020-01-25) |
+| obsDate | String | Yes | The observation date in ISO format (eg: 2020-01-25) |
 | nObservers | Integer | No | Number of observers (default: 1) |
 | utmSquare | String | No | The utm square as 7-character code, if applicable |
 | province | String | No | 2-character province code |
@@ -469,10 +483,10 @@ A checklist submission must be by http POST, with the following variables:
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| trackLongitude | Float | Yes | Vector of longitude coordinates recorded from the GPS  |
-| trackLatitude | Float | Yes | Vector of latitude coordinates recorded from the GPS |
-| trackAltitude | Float | Yes | Vector of longitude coordinates recorded from the GPS |
-| trackTimestamp | Float | Yes | Vector of longitude coordinates recorded from the GPS |
+| longitude | Float | Yes | Decimal longitude coordinate recorded from the GPS  |
+| latitude | Float | Yes | Decimal latitude coordinate recorded from the GPS |
+| altitude | Float | Yes | Altitude (m) coordinate recorded from the GPS |
+| timestamp | Float | Yes | Unix timestamp recorded from the GPS |
 
 
 **The STATION_JSON structure:**
@@ -481,14 +495,14 @@ A checklist submission must be by http POST, with the following variables:
 | --------- | ---- | -------- | ----- |
 | stationId | Integer | No | stationId 0 is reserved for representing the entire checklist period, and stationId 1 or greater represent linked survey events within the checklist (e.g. point counts) |
 | startTime | Float | Yes | Start time of the observation. For stationId 0, this is the start of the entire checklist |
-| effortType | String | Yes | one of incidental, traveling, stationary or area search |
-| duration | Float | Yes | duration in decimal hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
-| distance | Float | Yes | distance in decimal km for travelling protocols. For stationId 0, this is the distance of the entire checklist INCLUDING sub stations |
-| area | Float | Yes | area in decimal ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations |
-| subProtocolId | Integer | No | Identifier for the station sub-protocol. Blank when stationId = 0 |
-| latitude | Float | Yes | Decimal degrees at the start of the station |
-| longitude | Float | Yes | Degrees at the start of the station |
-| locId | Integer | No | Existing locId when submitting from an existing site, or resubmitting an existing checklist |
+| effortType | String | Yes | One of: incidental, traveling, stationary or area search |
+| duration | Float | Yes | Duration in hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
+| distance | Float | Yes | Distance in km for travelling protocols. For stationId 0, this is the distance of the entire checklist INCLUDING sub stations |
+| area | Float | Yes | Area in ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations |
+| subProtocolId | Integer | No | Identifier for the station sub-protocol. Ignored when stationId = 0 |
+| latitude | Float | Yes | Decimal latitiude at the start of the station |
+| longitude | Float | Yes | Degrees longitude at the start of the station |
+| locId | Integer | No | Existing location ID when submitting from an existing site, or resubmitting an existing checklist |
 | locName | String | Yes | Name of the location. names of public sites should not be editable |
 | comments | String | No | General comments for the station |
 | customVars | JSON Array | No | Vector of custom variables, unique to the protocol |
@@ -506,7 +520,7 @@ A checklist submission must be by http POST, with the following variables:
 | distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | positions | JSON Array | No | Not yet applicable: list of coordinates representing individual positions of birds of a given species |
-| flag<sup>1</sup> | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented |
+| flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
 
 <div style="padding: 15px">
 <sup>1</sup> Values for SPECIES_JSON.flag:
