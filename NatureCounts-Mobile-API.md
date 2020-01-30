@@ -22,7 +22,7 @@ Use the following host to test against the current sandbox environment:
 3. [Errors](#errors)
 4. [Reference Data](#reference-data)
 5. [Data Submission](#data-submission)
-	1. [Adding a station](#add-a-new-station)
+	1. [Adding a Site](#add-a-site)
 	2. [Checklist Submission](#checklist-submission)
 
 
