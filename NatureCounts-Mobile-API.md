@@ -460,7 +460,7 @@ The response to a valid checklist submisson event:
 | recordId | Integer | The record ID, whether newly created or existing |
 
 
-The resonse to an invalid checklist submisson has not yet been defined......
+The response to an invalid checklist submisson has not yet been defined......
 
 
 **The CHECKLIST_JSON structure:**
