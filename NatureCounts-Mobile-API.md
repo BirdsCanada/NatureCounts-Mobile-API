@@ -443,6 +443,8 @@ Not available yet....
 
 ### Checklist Submission ###
 
+> /api/mobile/submitChecklist
+
 A checklist submission must be by http POST, with the following variables:
 
 | Parameter | Type | Required | Notes |
