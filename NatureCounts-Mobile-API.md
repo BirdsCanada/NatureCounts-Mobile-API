@@ -456,7 +456,7 @@ The response to a valid checklist submisson event:
 
 | Parameter | Type | Notes |
 | --------- | ---- | ----- |
-| statuus | String | Normally: 'success' |
+| status | String | Normally: 'success' |
 | recordId | Integer | The record ID, whether newly created or existing |
 
 
