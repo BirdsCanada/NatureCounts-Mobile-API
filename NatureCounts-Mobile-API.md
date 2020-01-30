@@ -81,9 +81,19 @@ Returns the profile associated with the token.
 
 ### Project Registration ###
 
-**Not available yet (2020-01-23)**
+Project registration may require that the project administrator authorizes the registration.
+A user's status in a project is returned as part of the response to the `/api/mobile/userProjects`
+entrypoint (see below).
 
+A user registration request is triggred by the following:
 
+> /api/mobile/projectRegister?token=asdfasdf&projectId=95
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The authentication token |
+| projectId | Integer | Yes | The project to which the user will be registered |
+| lang | String | No | A 2-letter language code, defaulting to EN |
 
 
 
@@ -426,6 +436,125 @@ Submissions will be by HTTP POST. Entrypoints are not yet available.
 
 ### Add a Site ###
 
+Not available yet....
 
 
-### Submit Observations ###
+### Checklist Submission ###
+
+A checklist submission must be by http POST, with the following variables:
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | Stirng | Yes | The user's token |
+| projectId | Integer | Yes | A decimal project ID |
+| checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
+
+**The CHECKLIST_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| formId | Integer | No | Must be set when submitting an existing checklist; otherwise blank or null |
+| obsDate | String | Yes | The observation datae in ISO format (eg: 2020-01-25) |
+| nObservers | Integer | No | Number of observers (default: 1) |
+| utmSquare | String | No | The utm square as 7-character code, if applicable |
+| province | String | No | 2-character province code |
+| regionId | Integer | No | Region ID |
+| ebirdChecklistId | String | No | eBird checklist ID used to validate this checklist, when applicable |
+| protocolId | Integer | Yes | Protocol ID |
+| track | JSON Array | No | A vector of JSON objects of type TRACK_JSON (when the track feature is enabled) |
+| isComplete | Boolean | No | Set to true if checklist reports every species detected |
+| stations | JSON Array | Yes | A vector of JSON objects of type STATION_JSON |
+
+**The TRACK_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| trackLongitude | Float | Yes | Vector of longitude coordinates recorded from the GPS  |
+| trackLatitude | Float | Yes | Vector of latitude coordinates recorded from the GPS |
+| trackAltitude | Float | Yes | Vector of longitude coordinates recorded from the GPS |
+| trackTimestamp | Float | Yes | Vector of longitude coordinates recorded from the GPS |
+
+
+**The STATION_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| stationId | Integer | No | stationId 0 is reserved for representing the entire checklist period, and stationId 1 or greater represent linked survey events within the checklist (e.g. point counts) |
+| startTime | Float | Yes | Start time of the observation. For stationId 0, this is the start of the entire checklist |
+| effortType | String | Yes | one of incidental, traveling, stationary or area search |
+| duration | Float | Yes | duration in decimal hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
+| distance | Float | Yes | distance in decimal km for travelling protocols. For stationId 0, this is the distance of the entire checklist INCLUDING sub stations |
+| area | Float | Yes | area in decimal ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations |
+| subProtocolId | Integer | No | Identifier for the station sub-protocol. Blank when stationId = 0 |
+| latitude | Float | Yes | Decimal degrees at the start of the station |
+| longitude | Float | Yes | Degrees at the start of the station |
+| locId | Integer | No | Existing locId when submitting from an existing site, or resubmitting an existing checklist |
+| locName | String | Yes | Name of the location. names of public sites should not be editable |
+| comments | String | No | General comments for the station |
+| customVars | JSON Array | No | Vector of custom variables, unique to the protocol |
+| species | JSON Array | Yes | A vector of JSON objects of type SPECIES_JSON |
+
+**The SPECIES_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| speciesId | Integer | Yes | numeric NatureCounts taxononic ID |
+| recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
+| breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
+| counts | JSON Array | Yes | A vector of JSON objects of type COUNT_JSON |
+| comments | String | No | additional species comments provided by the user |
+| distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
+| bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
+| positions | JSON Array | No | Not yet applicable: list of coordinates representing individual positions of birds of a given species |
+| flag<sup>1</sup> | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented |
+
+<div style="padding: 15px">
+<sup>1</sup> Values for SPECIES_JSON.flag:
+
+<ul>
+	<li>0 - common bird, no flag required</li>
+	<li>1 - rare species based on eBird filters. Species missing from filter or maximum set a 0 for the date.</li>
+	<li>2 - high count based on eBird filters. Observation where the actual count exceeds the filter for the date.</li>
+	<li>3 - rare breeder. Observation reported with a breeding evidence code (H or higher) should be documented.</li>
+</u>
+</div>
+
+**The COUNT_JSON structure:**
+
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| columnId | Integer | Yes | column number matching the protocol format |
+| count | Integer | Yes | number of individuals reported |
+
+
+
+**Important notes:**
+
+There is an important distinction between primary and children survey events. When the protocol allows a subProtocolId, additional events 
+(e.g. point counts) can be submitted within the main event. The primary event (called station) always gets assigned a stationId = 0. Linked events,
+identified with a subProtocolId, will have stationId of 1 or greater (each should be unique, and assigned in the order of creation by the user).
+
+When protocols allow sub-protocols, they may have a stationId 0 or not (as determined by the protocol field called hasStation0). In cases where there
+is both a stationId 0 and sub-protocols, the station 0 would contain all observations NOT already tabulated in other stations (so the total of all
+count values in all stations including station 0 would provide the actual total number of birds seen). However, for all of the other fields
+(e.g. duration and distance), the values assigned to station 0 would apply to the entire checklist.
+
+In cases where there is no station 0 allowed in the protocol, this indicates that the participant would only report observations at individual points,
+but not those made in between. E.g. a roadside survey with 5 minute points every km. In those cases, the survey would start immediately at station 1,
+and rather than return to the main survey form (station 0) when the station is completed, the user would have to option of ending the checklist 
+or adding an additional station.
+
+Preferably, when looking at station 0, the tally of observations reported on other stations would be visible to the user but not editable.
+
+For the moment, each speciesId within a station should be unique. I.E., only one record per species within a station. In the future, some protocols
+will need to support multiple entries per species (e.g. one record per individual bird), as well as additional fields (e.g. distance to bird, bearing).
+
+There will be additional variables that we may want to support in the future, but that are not relevant to protocols identified as priorities.
+
+Stations:
+	roadside (whether the survey was conducted on a roadside)
+	trafficCount (numbers of vehicles counted during the survey event)
+	noiseLevel (code representing the background noise level)
+	distanceFromStart (distance in km between the start of the checklist and the current station)
+
