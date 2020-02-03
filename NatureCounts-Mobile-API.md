@@ -285,7 +285,7 @@ Returns protocol ID's associated with a project:
 
 Returns detailed information on a specific protocol associated with a project:
 
-> /api/mobile/protocols?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+> /api/mobile/protocolDetails?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
 
 
 **Additional Parameter(s):**
@@ -296,6 +296,21 @@ Returns detailed information on a specific protocol associated with a project:
 | protocolId | Integer | Yes | A protocol ID |
 
 
+
+
+### Protocol Intervals ###
+
+Returns information on a specific protocol intervals:
+
+> /api/mobile/protocolIntervals?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
 
 
 
