@@ -391,6 +391,24 @@ Returns information about project sites within a region:
 
 
 
+### UTM Squares by Region ###
+
+Returns information about project sites within a region:
+
+> /api/mobile/utmSquares?token=asdfasdf&lang=EN&projectId=1007&province=ON&adminRegion=15
+
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| province | String | Yes | A 2-letter province code |
+| adminRegion | Integer | Yes | A region ID |
+
+
+
 
 ### Sites by Square ###
 
@@ -433,6 +451,7 @@ Find a UTM square from a decimal longitude and latitude:
 ## Data Submission #
 
 Submissions will be by HTTP POST.
+
 
 
 
