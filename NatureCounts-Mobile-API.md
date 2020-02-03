@@ -432,7 +432,7 @@ Find a UTM square from a decimal longitude and latitude:
 
 ## Data Submission #
 
-Submissions will be by HTTP POST. Entrypoints are not yet available.
+Submissions will be by HTTP POST.
 
 
 
