@@ -120,6 +120,27 @@ The `data_version` parameter should be stored and then used to signal that a cac
 has changed, then all reference data should be updated. This will not occur frequently.
 
 
+
+## API Last Modified Times Bundle ##
+
+Returns a set of entrypoint suffixes and last-modified datetime values for 
+use in updating reference data.
+
+**Precise description of this data package to be added shortly.**
+
+> /api/mobile/sync?token=asdfasdf&projectId=1007&ifModifiedSince=2019-12-15T15:23:12Z
+
+Authenticated: Yes
+
+**Return JSON attributes:**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The authentication token |
+| projectId | Integer | No | A project Id |
+| ifModifiedSince | String | No | A ISO-8601 formatted datetime (eg: 2020-01-12T15:30:23Z) |
+
+
 ## Errors ##
 
 Errors generated in the API will result in a JSON encoded error structure,
@@ -147,11 +168,9 @@ Reference data should be cached locally in the app, with a provision for periodi
 for a complete forced refresh. The `data_version` parameter returned by the `/api/mobile/dataVersion` entrypoint above should be
 checked against a stored value: if this value changes, a complete refresh of Reference Data is in order.
 
-Reference data are returned as JSON objects, structured as 'data frames'. The query result columns (fields) occur
-as attribute names within the JSON object, and the values of each attribute is a vector (JSON array) of values. The
-query records can be constructed by combining the vector values across all attributes in the JSON object.
+Reference data are returned as a JSON object with a single element `'items'`, which
+is an array of JSON objects. Each object corresponds to a single data record.
 
-**This format can be changed easily to instead return a more traditional array of JSON objects.**
 
 All Reference Data queries require a user authentication `token` parameter, and may include a `lang` 
 parameter. If the `lang` paramter is not provided, it will default to `EN`.
@@ -248,6 +267,22 @@ Returns a list of 4-letter Species Codes:
 Returns a list of species codes from the EBIRD checklist:
 
 > /api/mobile/speciesEbird?token=asdfasdf&lang=EN
+
+
+### Species EBIRD Limits ###
+
+
+Returns a list of limts for species in an EBIRD checklist:
+
+> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checlistId=CL23742
+
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| checklistId | String | Yes | An Ebird id (eg: CL23472) |
 
 
 ### Breeding Codes ###
