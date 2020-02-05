@@ -146,11 +146,11 @@ Authenticated: Yes
 
 | Attribute | Type | Notes |
 | --------- | ---- | ----- |
-| entry_point | String | The entry point suffix to call |
-| project_id | Integer | A project Id |
-| checklist_id | Integer | A checklist Id |
+| entryPoint | String | The entry point suffix to call |
+| projectId | Integer | A project Id |
+| checklistId | Integer | A checklist Id |
 | statprov | Integer | A 2-letter province code |
-| protocol_id | Integer | A protocol Id |
+| protocolId | Integer | A protocol Id |
 | region | Integer | A region Id |
 
 Any attributes that are not null should be included in the data call (using appropriate
