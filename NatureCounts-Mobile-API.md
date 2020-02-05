@@ -272,9 +272,9 @@ Returns a list of species codes from the EBIRD checklist:
 ### Species EBIRD Limits ###
 
 
-Returns a list of limts for species in an EBIRD checklist:
+Returns a list of limits for species in an EBIRD checklist:
 
-> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checlistId=CL23742
+> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checklistId=CL23742
 
 
 
