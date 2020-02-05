@@ -123,8 +123,9 @@ has changed, then all reference data should be updated. This will not occur freq
 
 ## API Last Modified Times Bundle ##
 
-Returns a set of entrypoint suffixes and last-modified datetime values for 
-use in updating reference data.
+Returns a set of entrypoints and parameters that should be used to
+refresh local cache with modified data.
+
 
 **Precise description of this data package to be added shortly.**
 
@@ -132,13 +133,28 @@ use in updating reference data.
 
 Authenticated: Yes
 
-**Return JSON attributes:**
+**Parameters**
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The authentication token |
 | projectId | Integer | No | A project Id |
 | ifModifiedSince | String | No | A ISO-8601 formatted datetime (eg: 2020-01-12T15:30:23Z) |
+
+**Return JSON attributes:**
+
+
+| Attribute | Type | Notes |
+| --------- | ---- | ----- |
+| entry_point | String | The entry point suffix to call |
+| project_id | Integer | A project Id |
+| checklist_id | Integer | A checklist Id |
+| statprov | Integer | A 2-letter province code |
+| protocol_id | Integer | A protocol Id |
+| region | Integer | A region Id |
+
+Any attributes that are not null should be included in the data call (using appropriate
+parameter names as detailed below).
 
 
 ## Errors ##
@@ -274,7 +290,7 @@ Returns a list of species codes from the EBIRD checklist:
 
 Returns a list of limits for species in an EBIRD checklist:
 
-> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checklistId=CL23742
+> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checlistId=CL23742
 
 
 
