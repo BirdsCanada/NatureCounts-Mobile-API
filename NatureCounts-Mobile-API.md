@@ -151,7 +151,7 @@ Authenticated: Yes
 | checklistId | Integer | A checklist Id |
 | statprov | Integer | A 2-letter province code |
 | protocolId | Integer | A protocol Id |
-| region | Integer | A region Id |
+| regionId | Integer | A region Id |
 
 Any attributes that are not null should be included in the data call (using appropriate
 parameter names as detailed below).
@@ -298,7 +298,8 @@ Returns a list of limits for species in an EBIRD checklist:
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| checklistId | String | Yes | An Ebird id (eg: CL23472) |
+| checklistId | String | No | An Ebird id (eg: CL23472) |
+| statprov | String | No | A 2-letter province code |
 
 
 ### Breeding Codes ###
@@ -389,7 +390,7 @@ Returns species appropriate for a specific protocol:
 
 Returns species appropriate for a province:
 
-> /api/mobile/speciesProvince?token=asdfasdf&lang=EN&province=ON
+> /api/mobile/speciesProvince?token=asdfasdf&lang=EN&statprov=ON
 
 
 
@@ -397,7 +398,7 @@ Returns species appropriate for a province:
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| province | String | Yes | A 2-letter province code |
+| statprov | String | Yes | A 2-letter province code |
 
 
 
@@ -405,15 +406,15 @@ Returns species appropriate for a province:
 
 Returns species appropriate for a region within a province:
 
-> /api/mobile/speciesRegion?token=asdfasdf&lang=EN&province=ON&regionId=15
+> /api/mobile/speciesRegion?token=asdfasdf&lang=EN&statprov=ON&regionId=15
 
 
 **Additional Parameter(s):**
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| province | String | Yes | A 2-letter province code |
-| regionId | Integer | Yes | A region ID |
+| statprov | String | Yes | A 2-letter province code |
+| regionId | Integer | No	| A region ID |
 
 
 
@@ -421,7 +422,7 @@ Returns species appropriate for a region within a province:
 
 Returns information about project sites within a bounding box:
 
-> /api/mobile/sitesCoordinates?token=asdfasdf&lang=EN&province=ON&regionId=15
+> /api/mobile/sitesCoordinates?token=asdfasdf&lang=EN&statprov=ON&regionId=15
 
 **Additional Parameter(s):**
 
@@ -442,7 +443,7 @@ Returns information about project sites within a bounding box:
 
 Returns information about project sites within a region:
 
-> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&province=ON&regionId=15
+> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&statprov=ON&regionId=15
 
 
 
@@ -452,7 +453,7 @@ Returns information about project sites within a region:
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
 | locType | String | Yes | A location type (e.g.: EBIRD) |
-| province | String | Yes | A 2-letter province code |
+| statprov | String | Yes | A 2-letter province code |
 | regionId | Integer | Yes | A region ID |
 
 
@@ -461,7 +462,7 @@ Returns information about project sites within a region:
 
 Returns information about project sites within a region:
 
-> /api/mobile/utmSquares?token=asdfasdf&lang=EN&projectId=1007&province=ON&adminRegion=15
+> /api/mobile/utmSquares?token=asdfasdf&lang=EN&projectId=1007&statprov=ON&regionId=15
 
 
 
@@ -470,8 +471,8 @@ Returns information about project sites within a region:
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | projectId | Integer | Yes | A project ID |
-| province | String | Yes | A 2-letter province code |
-| adminRegion | Integer | Yes | A region ID |
+| statprov | String | Yes | A 2-letter province code |
+| regionId | Integer | Yes | A region ID |
 
 
 
@@ -558,7 +559,7 @@ The response to an invalid checklist submisson has not yet been defined......
 | obsDate | String | Yes | The observation date in ISO format (eg: 2020-01-25) |
 | nObservers | Integer | No | Number of observers (default: 1) |
 | utmSquare | String | No | The utm square as 7-character code, if applicable |
-| province | String | No | 2-character province code |
+| statprov | String | No | 2-character province code |
 | regionId | Integer | No | Region ID |
 | ebirdChecklistId | String | No | eBird checklist ID used to validate this checklist, when applicable |
 | protocolId | Integer | Yes | Protocol ID |
