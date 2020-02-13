@@ -130,7 +130,7 @@ refresh local cache with modified data.
 
 **Precise description of this data package to be added shortly.**
 
-> /api/mobile/sync?token=asdfasdf&projectId=1007&ifModifiedSince=2019-12-15T15:23:12Z
+> /api/mobile/sync?token=asdfasdf&projectIds=1007,1009&ifModifiedSince=2019-12-15T15:23:12Z
 
 Authenticated: Yes
 
@@ -139,7 +139,7 @@ Authenticated: Yes
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The authentication token |
-| projectId | Integer | No | A project Id |
+| projectIds | String | Yes | A comma delimated list of project Ids |
 | ifModifiedSince | String | No | A ISO-8601 formatted datetime (eg: 2020-01-12T15:30:23Z) |
 
 **Return JSON attributes:**
@@ -154,8 +154,12 @@ Authenticated: Yes
 | protocolId | Integer | A protocol Id |
 | regionId | Integer | A region Id |
 
-Any attributes that are not null should be included in the data call (using appropriate
-parameter names as detailed below).
+Any attributes that are present and not null should be used to:
+
+1. delete records from appropriate tables in the local cache
+2. query the api to get replacement records for those deleted.
+
+
 
 
 ## Errors ##
@@ -277,6 +281,12 @@ Returns a list of 4-letter Species Codes:
 
 > /api/mobile/speciesCodes?token=asdfasdf&lang=EN
 
+
+### Species Status Symbols ###
+
+Returns status symbols for species:
+
+> /api/mobile/speciesStatusSymbols?token=asdfasdf&lang=EN
 
 
 ### Species EBIRD Codes ###
