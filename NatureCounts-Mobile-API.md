@@ -392,6 +392,7 @@ Returns species appropriate for a specific protocol:
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | protocolId | Integer | Yes | A protocol ID |
+| projectId | Integer | No | A project ID |
 
 
 
