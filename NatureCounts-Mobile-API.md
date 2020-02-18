@@ -549,7 +549,7 @@ A checklist submission must be by http POST, with the following variables:
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The user's token |
 | projectId | Integer | Yes | A decimal project ID |
-| trace | Integer | No | A value greater than one turns on tracing for the devlopment team |
+| trace | Integer | No | A value greater than one turns on tracing for development team |
 | checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
 
 
@@ -558,7 +558,7 @@ The response to a valid checklist submisson event:
 | Parameter | Type | Notes |
 | --------- | ---- | ----- |
 | status | String | Normally: 'success' |
-| recordId | Integer | The record ID, whether newly created or existing |
+| formId | Integer | The record ID, whether newly created or existing |
 
 
 The response to an invalid checklist submisson has not yet been defined......
@@ -568,7 +568,6 @@ The response to an invalid checklist submisson has not yet been defined......
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| formId | Integer | No | Must be set when submitting an existing checklist; otherwise blank or null |
 | obsDate | String | Yes | The observation date in ISO format (eg: 2020-01-25) |
 | nObservers | Integer | No | Number of observers (default: 1) |
 | utmSquare | String | No | The utm square as 7-character code, if applicable |
@@ -616,7 +615,7 @@ The response to an invalid checklist submisson has not yet been defined......
 | speciesId | Integer | Yes | numeric NatureCounts taxononic ID |
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
 | breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
-| counts | JSON Array | Yes | A vector of JSON objects of type COUNT_JSON |
+| counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
 | comments | String | No | additional species comments provided by the user |
 | distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
@@ -633,15 +632,6 @@ The response to an invalid checklist submisson has not yet been defined......
 	<li>3 - rare breeder. Observation reported with a breeding evidence code (H or higher) should be documented.</li>
 </u>
 </div>
-
-**The COUNT_JSON structure:**
-
-
-| Attribute | Type | Required | Notes |
-| --------- | ---- | -------- | ----- |
-| columnId | Integer | Yes | column number matching the protocol format |
-| count | Integer | Yes | number of individuals reported |
-
 
 
 **Important notes:**
