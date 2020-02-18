@@ -549,6 +549,7 @@ A checklist submission must be by http POST, with the following variables:
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The user's token |
 | projectId | Integer | Yes | A decimal project ID |
+| trace | Integer | No | A value greater than one turns on tracing for the devlopment team |
 | checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
 
 
