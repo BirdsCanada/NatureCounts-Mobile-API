@@ -619,7 +619,8 @@ The response to an invalid checklist submisson has not yet been defined......
 | comments | String | No | additional species comments provided by the user |
 | distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
-| positions | JSON Array | No | Not yet applicable: list of coordinates representing individual positions of birds of a given species |
+| positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
+| positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
 | flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
 
 <div style="padding: 15px">
