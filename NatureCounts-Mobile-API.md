@@ -378,6 +378,24 @@ Returns information on a specific protocol intervals:
 
 
 
+### Protocol Types ###
+
+Returns details relevant for specific protocols:
+
+> /api/mobile/protocolTypes?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
+
+
+
+
+
 
 ### Protocol Species ###
 
@@ -622,6 +640,7 @@ The response to an invalid checklist submisson has not yet been defined......
 | positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
 | positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
 | flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
+
 
 <div style="padding: 15px">
 <sup>1</sup> Values for SPECIES_JSON.flag:
