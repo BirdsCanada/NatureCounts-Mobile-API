@@ -130,7 +130,7 @@ refresh local cache with modified data.
 
 **Precise description of this data package to be added shortly.**
 
-> /api/mobile/sync?token=asdfasdf&projectIds=1007,1009&ifModifiedSince=2019-12-15T15:23:12Z
+> /api/mobile/sync?projectIds=1007,1009&ifModifiedSince=2019-12-15T15:23:12Z
 
 Authenticated: Yes
 
@@ -138,7 +138,6 @@ Authenticated: Yes
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| token | String | Yes | The authentication token |
 | projectIds | String | Yes | A comma delimated list of project Ids |
 | ifModifiedSince | String | No | A ISO-8601 formatted datetime (eg: 2020-01-12T15:30:23Z) |
 
