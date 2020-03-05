@@ -193,14 +193,13 @@ Reference data are returned as a JSON object with a single element `'items'`, wh
 is an array of JSON objects. Each object corresponds to a single data record.
 
 
-All Reference Data queries require a user authentication `token` parameter, and may include a `lang` 
+Reference Data queries do not require user authentication, but may include a `lang` 
 parameter. If the `lang` paramter is not provided, it will default to `EN`.
 
 **Common Parameters**
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| token | String | Yes | The authentication token |
 | lang | String | No | A 2-letter language code, defaulting to EN |
 
 
@@ -210,7 +209,7 @@ parameter. If the `lang` paramter is not provided, it will default to `EN`.
 
 Return a list of all projects relevant to the mobile app:
 
-> /api/mobile/projects?token=asdfasdf&lang=EN
+> /api/mobile/projects?lang=EN
 
 
 
@@ -219,7 +218,7 @@ Return a list of all projects relevant to the mobile app:
 
 Returns a list of Canadian Provinces with their 2-letter codes:
 
-> /api/mobile/provinces?token=asdfasdf&lang=EN
+> /api/mobile/provinces?lang=EN
 
 
 
@@ -229,7 +228,7 @@ Returns a list of Canadian Provinces with their 2-letter codes:
 
 Return a list of provinces associated with all projects:
 
-> /api/mobile/projectsProvinces?token=asdfasdf&lang=EN
+> /api/mobile/projectsProvinces?lang=EN
 
 
 
@@ -239,7 +238,7 @@ Return a list of provinces associated with all projects:
 
 Returns a list of regions with their region ID's:
 
-> /api/mobile/regions?token=asdfasdf&lang=EN
+> /api/mobile/regions?lang=EN
 
 
 
@@ -249,7 +248,7 @@ Returns a list of regions with their region ID's:
 
 Returns the projects to which the user is registered, along with a status.
 
-> /api/mobile/userProjects?token=asdfasdf&lang=EN	
+> /api/mobile/userProjects?lang=EN	
 
 
 
@@ -264,7 +263,7 @@ Returns the projects to which the user is registered, along with a status.
 
 Returns a list of species:
 
-> /api/mobile/species?token=asdfasdf&lang=EN
+> /api/mobile/species?lang=EN
 
 
 
@@ -272,28 +271,28 @@ Returns a list of species:
 
 Returns a list of species groups:
 
-> /api/mobile/speciesGroups?token=asdfasdf&lang=EN
+> /api/mobile/speciesGroups?lang=EN
 
  
 ### Species Codes ###
 
 Returns a list of 4-letter Species Codes:
 
-> /api/mobile/speciesCodes?token=asdfasdf&lang=EN
+> /api/mobile/speciesCodes?lang=EN
 
 
 ### Species Status Symbols ###
 
 Returns status symbols for species:
 
-> /api/mobile/speciesStatusSymbols?token=asdfasdf&lang=EN
+> /api/mobile/speciesStatusSymbols?lang=EN
 
 
 ### Species EBIRD Codes ###
 
 Returns a list of species codes from the EBIRD checklist:
 
-> /api/mobile/speciesEbird?token=asdfasdf&lang=EN
+> /api/mobile/speciesEbird?lang=EN
 
 
 ### Species EBIRD Limits ###
@@ -301,7 +300,7 @@ Returns a list of species codes from the EBIRD checklist:
 
 Returns a list of limits for species in an EBIRD checklist:
 
-> /api/mobile/speciesEbirdLimits?token=asdfasdf&lang=EN&checlistId=CL23742
+> /api/mobile/speciesEbirdLimits?lang=EN&checlistId=CL23742
 
 
 
@@ -317,7 +316,7 @@ Returns a list of limits for species in an EBIRD checklist:
 
 Returns a list of breeding evidence codes:
 
-> /api/mobile/breedingCodes?token=asdfasdf&lang=EN
+> /api/mobile/breedingCodes?lang=EN
 
 
 
@@ -325,7 +324,7 @@ Returns a list of breeding evidence codes:
 
 Returns a list of invalid breeding evidence codes for species:
 
-> /api/mobile/speciesInvalidBreedingEvidence?token=asdfasdf&lang=EN
+> /api/mobile/speciesInvalidBreedingEvidence?lang=EN
 
 
 
@@ -333,7 +332,7 @@ Returns a list of invalid breeding evidence codes for species:
 
 Returns protocol ID's associated with a project:
 
-> /api/mobile/projectProtocols?token=asdfasdf&lang=EN&projectId=1007
+> /api/mobile/projectProtocols?lang=EN&projectId=1007
 
 
 
@@ -348,7 +347,7 @@ Returns protocol ID's associated with a project:
 
 Returns detailed information on a specific protocol associated with a project:
 
-> /api/mobile/protocolDetails?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+> /api/mobile/protocolDetails?lang=EN&projectId=1007&protocolId=95
 
 
 **Additional Parameter(s):**
@@ -365,7 +364,7 @@ Returns detailed information on a specific protocol associated with a project:
 
 Returns information on a specific protocol intervals:
 
-> /api/mobile/protocolIntervals?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+> /api/mobile/protocolIntervals?lang=EN&projectId=1007&protocolId=95
 
 
 **Additional Parameter(s):**
@@ -382,7 +381,7 @@ Returns information on a specific protocol intervals:
 
 Returns details relevant for specific protocols:
 
-> /api/mobile/protocolTypes?token=asdfasdf&lang=EN&projectId=1007&protocolId=95
+> /api/mobile/protocolTypes?lang=EN&projectId=1007&protocolId=95
 
 
 **Additional Parameter(s):**
@@ -401,7 +400,7 @@ Returns details relevant for specific protocols:
 
 Returns species appropriate for a specific protocol:
 
-> /api/mobile/protocolsSpecies?token=asdfasdf&lang=EN&protocolId=95
+> /api/mobile/protocolsSpecies?lang=EN&protocolId=95
 
 
 
@@ -420,7 +419,7 @@ Returns species appropriate for a specific protocol:
 
 Returns species appropriate for a province:
 
-> /api/mobile/speciesProvince?token=asdfasdf&lang=EN&statprov=ON
+> /api/mobile/speciesProvince?lang=EN&statprov=ON
 
 
 
@@ -436,7 +435,7 @@ Returns species appropriate for a province:
 
 Returns species appropriate for a region within a province:
 
-> /api/mobile/speciesRegion?token=asdfasdf&lang=EN&statprov=ON&regionId=15
+> /api/mobile/speciesRegion?lang=EN&statprov=ON&regionId=15
 
 
 **Additional Parameter(s):**
@@ -452,7 +451,7 @@ Returns species appropriate for a region within a province:
 
 Returns information about project sites within a bounding box:
 
-> /api/mobile/sitesCoordinates?token=asdfasdf&lang=EN&statprov=ON&regionId=15
+> /api/mobile/sitesCoordinates?lang=EN&statprov=ON&regionId=15
 
 **Additional Parameter(s):**
 
@@ -473,7 +472,7 @@ Returns information about project sites within a bounding box:
 
 Returns information about project sites within a region:
 
-> /api/mobile/sitesRegions?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&statprov=ON&regionId=15
+> /api/mobile/sitesRegions?lang=EN&projectId=1007&locType=EBIRD&statprov=ON&regionId=15
 
 
 
@@ -492,7 +491,7 @@ Returns information about project sites within a region:
 
 Returns information about project sites within a region:
 
-> /api/mobile/utmSquares?token=asdfasdf&lang=EN&projectId=1007&statprov=ON&regionId=15
+> /api/mobile/utmSquares?lang=EN&projectId=1007&statprov=ON&regionId=15
 
 
 
@@ -511,7 +510,7 @@ Returns information about project sites within a region:
 
 Returns information about sites within a specific UTM square:
 
-> /api/mobile/sitesSquares?token=asdfasdf&lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
+> /api/mobile/sitesSquares?lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
 
 
 
@@ -530,7 +529,7 @@ Returns information about sites within a specific UTM square:
 
 Find a UTM square from a decimal longitude and latitude:
 
-> /api/mobile/findSquare?token=asdfasdf&lang=EN&lon=-76.5050&lat=44.7366
+> /api/mobile/findSquare?lang=EN&lon=-76.5050&lat=44.7366
 
 
 
