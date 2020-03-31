@@ -54,7 +54,7 @@ Required parameter: **username** - the account username
 
 Required parameter: **password** - the account password
 
->**Example URL:** /api/data/authenticate?username=asdfasdf&password=qwerty
+>**Example URL:** /api/mobile/authenticate?username=asdfasdf&password=qwerty
 
 >**Example Response:** {"token":"1234567890qwerty,"api_version":"2019.01"}
 
