@@ -610,9 +610,9 @@ The response to an invalid checklist submisson has not yet been defined......
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | stationId | Integer | No | stationId 0 is reserved for representing the entire checklist period, and stationId 1 or greater represent linked survey events within the checklist (e.g. point counts) |
-| startTime | Float | Yes | Start time of the observation. For stationId 0, this is the start of the entire checklist |
+| startTime | Float | Yes | Start time of the observation. For stationId 0, this is the start of the entire checklist (in decimal hours) |
 | effortType | String | Yes | One of: incidental, traveling, stationary or area search |
-| duration | Float | Yes | Duration in hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
+| duration | Float | Yes | Duration in decimal hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
 | distance | Float | Yes | Distance in km for travelling protocols. For stationId 0, this is the distance of the entire checklist INCLUDING sub stations |
 | area | Float | Yes | Area in ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations |
 | subProtocolId | Integer | No | Identifier for the station sub-protocol. Ignored when stationId = 0 |
