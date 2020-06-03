@@ -599,11 +599,16 @@ The response to an invalid checklist submisson has not yet been defined......
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| longitude | Float | Yes | Decimal longitude coordinate recorded from the GPS  |
-| latitude | Float | Yes | Decimal latitude coordinate recorded from the GPS |
-| altitude | Float | Yes | Altitude (m) coordinate recorded from the GPS |
-| timestamp | Float | Yes | Unix timestamp recorded from the GPS |
+| longitude | Vector of Floats | Yes | Vector of decimal longitude coordinates recorded from the GPS  |
+| latitude | Vector of Floats | Yes | Vector of decimal latitude coordinate recorded from the GPS |
+| altitude | Vector of Floats | Yes | Vector of altitude (m) recorded from the GPS |
+| timestamp | Vector of Floats | Yes | Vector of Unix timestamp recorded from the GPS |
 
+Note: decimal coordinates should be rounded to the nearest 6th decimals, and altitude and timestamps to the nearest decimal.
+
+```
+Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": [45.987654, 45.987653, 45.987652], , "altitude": [100.1, 100.5, 100.2], "timestamp": [1591120800.0, 1591120830.0, 1591120860.0]}
+```
 
 **The STATION_JSON structure:**
 
