@@ -580,6 +580,31 @@ The response to a valid checklist submisson event:
 The response to an invalid checklist submisson has not yet been defined......
 
 
+> /api/mobile/submitChecklistEx
+
+A checklist submission must be by http POST, with the following variables:
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The user's token |
+| projectId | Integer | Yes | A decimal project ID |
+| trace | Integer | No | A value greater than one turns on tracing for development team |
+| checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
+| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see below) |
+
+
+The response to a valid checklist submisson event:
+
+| Parameter | Type | Notes |
+| --------- | ---- | ----- |
+| status | String | Normally: 'success' |
+| formId | Integer | The record ID, whether newly created or existing |
+
+
+The response to an invalid checklist submisson has not yet been defined......
+
+
+
 **The CHECKLIST_JSON structure:**
 
 | Attribute | Type | Required | Notes |
@@ -610,6 +635,14 @@ Note: decimal coordinates should be rounded to the nearest 6th decimals, and alt
 Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": [45.987654, 45.987653, 45.987652], , "altitude": [100.1, 100.5, 100.2], "timestamp": [1591120800.0, 1591120830.0, 1591120860.0]}
 ```
 
+**The CUSTOM_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| customId | String | Yes | The customId as provided in the protocol custom variable query response |
+| value | String | Yes | a possibly comma-delimited string of values |
+
+
 **The STATION_JSON structure:**
 
 | Attribute | Type | Required | Notes |
@@ -628,7 +661,10 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 | locName | String | Yes | Name of the location. names of public sites should not be editable |
 | comments | String | No | General comments for the station |
 | customVars | JSON Array | No | Vector of custom variables, unique to the protocol |
-| species | JSON Array | Yes | A vector of JSON objects of type SPECIES_JSON |
+| species | JSON Array | Yes | A vector of JSON objects of type SPECIES_JSON or of type SPECIES2_JSON |
+| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) |
+
+Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobile/submitChecklistEx entrypoint
 
 **The SPECIES_JSON structure:**
 
@@ -646,6 +682,13 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 | positionsCounts | JSON Array | No | Not yet applicable: list of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
 | flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
 
+**The SPECIES2_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| speciesId | Integer | Yes | numeric NatureCounts taxononic ID |
+| records | JSON Array | Yes | and array of RECORD_JSON objects |
+| flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
 
 <div style="padding: 15px">
 <sup>1</sup> Values for SPECIES_JSON.flag:
@@ -657,6 +700,27 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 	<li>3 - rare breeder. Observation reported with a breeding evidence code (H or higher) should be documented.</li>
 </u>
 </div>
+
+**The RECORD_JSON structure:**
+
+| Attribute | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
+| breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
+| counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
+| comments | String | No | additional species comments provided by the user |
+| distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
+| bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
+| positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
+| positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
+| positionsCounts | JSON Array | No | Not yet applicable: list of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
+| time | Float | Yes | The decimal minutes since start of the observation |
+| longitude | Float | Yes | the longitude of the record observation |
+| latitude | Float | Yes | the latitude of the record observation |
+| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) |
+
+
+
 
 
 **Important notes:**
