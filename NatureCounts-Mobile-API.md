@@ -590,7 +590,6 @@ A checklist submission must be by http POST, with the following variables:
 | projectId | Integer | Yes | A decimal project ID |
 | trace | Integer | No | A value greater than one turns on tracing for development team |
 | checklist | JSON Object | Yes | JSON structure of type CHECKLIST_JSON (see below) |
-| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see below) |
 
 
 The response to a valid checklist submisson event:
@@ -619,6 +618,8 @@ The response to an invalid checklist submisson has not yet been defined......
 | track | JSON Array | No | A vector of JSON objects of type TRACK_JSON (when the track feature is enabled) |
 | isComplete | Boolean | No | Set to true if checklist reports every species detected |
 | stations | JSON Array | Yes | A vector of JSON objects of type STATION_JSON |
+| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see below) |
+
 
 **The TRACK_JSON structure:**
 
