@@ -641,7 +641,8 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | customId | String | Yes | The customId as provided in the protocol custom variable query response |
-| value | String | Yes | a possibly comma-delimited string of values |
+| level | String | Yes | The level value provided as part of the customVar defination |
+| value | String | Yes | A possibly comma-delimited string of values |
 
 
 **The STATION_JSON structure:**
