@@ -612,8 +612,8 @@ The response to an invalid checklist submisson has not yet been defined......
 
 > /api/mobile/submitChecklistEx
 
-** This is the new checklist submission entrypoint to be used for phase 2 development (which includes custom variable handling at three
-levels). The original submission entrypoint defined immediately above is maintained only for the initial release of the mobile app: it will be deprecated in time? **
+**This is the new checklist submission entrypoint to be used for phase 2 development (which includes custom variable handling at three
+levels). The original submission entrypoint defined immediately above is maintained only for the initial release of the mobile app: it will be deprecated in time?**
 
 A checklist submission must be by http POST, with the following variables:
 
@@ -704,7 +704,7 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 
 **The SPECIES_JSON structure:**
 
-** This will be maintained only for the lifespan of the initial app release. **
+**This will be maintained only for the lifespan of the initial app release.**
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
