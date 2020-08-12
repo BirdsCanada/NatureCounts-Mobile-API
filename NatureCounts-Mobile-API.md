@@ -375,6 +375,36 @@ Returns information on a specific protocol intervals:
 
 
 
+### Protocol Custom Variables ###
+
+Returns a list of custom variables appropriate for the protocol and project:
+
+> /api/mobile/protocolCustomVars?lang=EN&projectId=1047&protocolId=95
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
+
+The variable definitions include the following fields:
+
+| Field | Type | Notes |
+| --------- | ---- | ----- |
+| custom_id | String | Must be sent back to the api when checklist is submitted |
+| label | String | Display label |
+| label_fr | String | French display label |
+| sort_order | Integer | If relevant |
+| field_type | String | Specifies the UI element to display |
+| range | String | Context specific |
+| values | String | Context specific |
+| values_fr | String | Context specific |
+| level | String | One of: survey, start, end, station, species, interval |
+| required | Boolean | False if null |
+| include_in_total | String | One of N, Y, null |
+
 
 ### Protocol Types ###
 
@@ -641,9 +671,10 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | customId | String | Yes | The customId as provided in the protocol custom variable query response |
-| level | String | Yes | The level value provided as part of the customVar defination |
+| level | String | Yes | The level value provided as part of the customVars structure |
 | values | String | Yes | A possibly comma-delimited string of values |
 
+Note: customId can occur in 
 
 **The STATION_JSON structure:**
 
