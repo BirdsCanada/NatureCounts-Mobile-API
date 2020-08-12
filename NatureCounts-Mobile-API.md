@@ -377,7 +377,7 @@ Returns information on a specific protocol intervals:
 
 ### Protocol Custom Variables ###
 
-Returns a list of custom variables appropriate for the protocol and project:
+Returns a list of custom variables (array of objects) appropriate for the protocol and project:
 
 > /api/mobile/protocolCustomVars?lang=EN&projectId=1047&protocolId=95
 
@@ -394,14 +394,14 @@ The variable definitions include the following fields:
 | Field | Type | Notes |
 | --------- | ---- | ----- |
 | custom_id | String | Must be sent back to the api when checklist is submitted |
+| level | String | One of: survey, start, end, station, species, interval. Must be sent back to the API when checklist is submitted. |
 | label | String | Display label |
 | label_fr | String | French display label |
-| sort_order | Integer | If relevant |
+| sort_order | Integer | If relevant. Determines the display order in the app, within a level. |
 | field_type | String | Specifies the UI element to display |
 | range | String | Context specific |
-| values | String | Context specific |
+| values | String | Context specific. |
 | values_fr | String | Context specific |
-| level | String | One of: survey, start, end, station, species, interval |
 | required | Boolean | False if null |
 | include_in_total | String | One of N, Y, null |
 
