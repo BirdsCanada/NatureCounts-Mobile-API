@@ -398,14 +398,25 @@ The variable definitions include the following fields:
 | label | String | Display label |
 | label_fr | String | French display label |
 | sort_order | Integer | If relevant. Determines the display order in the app, within a level. |
-| field_type | String | Specifies the UI element to display |
+| field_type | String | Specifies the UI element to display (see types below) |
 | range | String | Context specific |
 | values | String | Context specific. |
 | values_fr | String | Context specific |
-| required | Boolean | False if null |
+| required | Boolean | False if null. Whether a value is required for the field. Always enforced for type = “start”, “end” or “station”. For type = “species”, only applies if there is at least one record with a value for the species (i.e. across all records if multiples are allowed). For type = “interval”, only applies if there is at least one value among the other interval variables. (e.g., if the user enters a count, they must also enter a bearing or vice-versa). |
 | include_in_total | String | One of N, Y, null |
 
+possible field_type values:
 
+| field_type | Description |
+| --------- | ----- |
+| text | any arbitrary text is allowed. Opens a modal window for species and interval levels. |
+| numeric | any arbitrary number is allowed, including floats (within the min/max range, if provided) |
+| integer | any arbitrary integer number is allowed (within the min/max range, if provided)  |
+| counter | any arbitrary positive integer number is allowed (within the range, if provided). Important: a single tap on the field would increment the value by 1. A long press would allow keyboard entry. |
+| checkbox | a checkbox (true or false). defaults to false. |
+| list | A drop down list, allowing with values defined Open a modal window in all cases. If the field is not required, null should be added as one of the possible options. |
+| yes/no | species case of list defined for convenience, with “yes” and “no” values only. Null are also allowed. |
+ 
 ### Protocol Types ###
 
 Returns details relevant for specific protocols:
