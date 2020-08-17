@@ -398,7 +398,7 @@ The variable definitions include the following fields:
 | label | String | Display label |
 | label_fr | String | French display label |
 | field_type | String | Specifies the UI element to display (see types below) |
-| options | JSON Array | Present for 'dropdown' field_type: an array of OPTION_JSON object (see below). |
+| options | JSON Array | Present for `dropdown` field_type: an array of OPTION_JSON object (see below). |
 | sort_order | Integer | If relevant. Determines the display order in the app, within a level. |
 | range | String | Context specific |
 | required | Boolean | False if null. Whether a value is required for the field. Always enforced for type = “start”, “end” or “station”. For type = “species”, only applies if there is at least one record with a value for the species (i.e. across all records if multiples are allowed). For type = “interval”, only applies if there is at least one value among the other interval variables. (e.g., if the user enters a count, they must also enter a bearing or vice-versa). |
@@ -418,7 +418,7 @@ possible field_type values:
  
 OPTION_JSON Object
 
-Carries options values and labels for field_type 'dropdown'
+Carries option values and labels for field_type `dropdown`
 
 | Attribute | Description |
 | --------- | ----------- |
@@ -427,7 +427,6 @@ Carries options values and labels for field_type 'dropdown'
 | value | The option's value, for submission back to the checklist entrypoint |
 
 
-This is a JSON array of 
 
 ### Protocol Types ###
 
@@ -779,7 +778,3 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | longitude | Float | Yes | the longitude of the record observation |
 | latitude | Float | Yes | the latitude of the record observation |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) |
-
-
-
-
