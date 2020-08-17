@@ -397,11 +397,10 @@ The variable definitions include the following fields:
 | level | String | One of: survey, start, end, station, species, interval. Must be sent back to the API when checklist is submitted. |
 | label | String | Display label |
 | label_fr | String | French display label |
-| sort_order | Integer | If relevant. Determines the display order in the app, within a level. |
 | field_type | String | Specifies the UI element to display (see types below) |
+| options | JSON Array | Present for 'dropdown' field_type: an array of OPTION_JSON object (see below). |
+| sort_order | Integer | If relevant. Determines the display order in the app, within a level. |
 | range | String | Context specific |
-| values | String | Context specific. |
-| values_fr | String | Context specific |
 | required | Boolean | False if null. Whether a value is required for the field. Always enforced for type = “start”, “end” or “station”. For type = “species”, only applies if there is at least one record with a value for the species (i.e. across all records if multiples are allowed). For type = “interval”, only applies if there is at least one value among the other interval variables. (e.g., if the user enters a count, they must also enter a bearing or vice-versa). |
 | include_in_total | String | One of N, Y, null |
 
@@ -414,9 +413,22 @@ possible field_type values:
 | integer | any arbitrary integer number is allowed (within the min/max range, if provided)  |
 | counter | any arbitrary positive integer number is allowed (within the range, if provided). Important: a single tap on the field would increment the value by 1. A long press would allow keyboard entry. |
 | checkbox | a checkbox (true or false). defaults to false. |
-| list | A drop down list, allowing with values defined Open a modal window in all cases. If the field is not required, null should be added as one of the possible options. |
+| dropdown | A drop down list, allowing with values defined Open a modal window in all cases. If the field is not required, null should be added as one of the possible options. |
 | yes/no | species case of list defined for convenience, with “yes” and “no” values only. Null are also allowed. |
  
+OPTION_JSON Object
+
+Carries options values and labels for field_type 'dropdown'
+
+| Attribute | Description |
+| --------- | ----------- |
+| label | English label to display in dropdown |
+| label_fr | French label to display in dropdown |
+| value | The option's value, for submission back to the checklist entrypoint |
+
+
+This is a JSON array of 
+
 ### Protocol Types ###
 
 Returns details relevant for specific protocols:
@@ -770,34 +782,4 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 
 
 
-
-
-**Important notes:**
-
-There is an important distinction between primary and children survey events. When the protocol allows a subProtocolId, additional events 
-(e.g. point counts) can be submitted within the main event. The primary event (called station) always gets assigned a stationId = 0. Linked events,
-identified with a subProtocolId, will have stationId of 1 or greater (each should be unique, and assigned in the order of creation by the user).
-
-When protocols allow sub-protocols, they may have a stationId 0 or not (as determined by the protocol field called hasStation0). In cases where there
-is both a stationId 0 and sub-protocols, the station 0 would contain all observations NOT already tabulated in other stations (so the total of all
-count values in all stations including station 0 would provide the actual total number of birds seen). However, for all of the other fields
-(e.g. duration and distance), the values assigned to station 0 would apply to the entire checklist.
-
-In cases where there is no station 0 allowed in the protocol, this indicates that the participant would only report observations at individual points,
-but not those made in between. E.g. a roadside survey with 5 minute points every km. In those cases, the survey would start immediately at station 1,
-and rather than return to the main survey form (station 0) when the station is completed, the user would have to option of ending the checklist 
-or adding an additional station.
-
-Preferably, when looking at station 0, the tally of observations reported on other stations would be visible to the user but not editable.
-
-For the moment, each speciesId within a station should be unique. I.E., only one record per species within a station. In the future, some protocols
-will need to support multiple entries per species (e.g. one record per individual bird), as well as additional fields (e.g. distance to bird, bearing).
-
-There will be additional variables that we may want to support in the future, but that are not relevant to protocols identified as priorities.
-
-Stations:
-	roadside (whether the survey was conducted on a roadside)
-	trafficCount (numbers of vehicles counted during the survey event)
-	noiseLevel (code representing the background noise level)
-	distanceFromStart (distance in km between the start of the checklist and the current station)
 
