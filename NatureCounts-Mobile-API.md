@@ -413,8 +413,7 @@ possible field_type values:
 | integer | any arbitrary integer number is allowed (within the min/max range, if provided)  |
 | counter | any arbitrary positive integer number is allowed (within the range, if provided). Important: a single tap on the field would increment the value by 1. A long press would allow keyboard entry. |
 | checkbox | a checkbox (true or false). defaults to false. |
-| dropdown | A drop down list, with values defined in `options` attribute. Open a modal window in all cases. 
-If the field is not required, null should be added as one of the possible options. |
+| dropdown | A drop down list, with values defined in `options` attribute. Open a modal window in all cases. If the field is not required, null should be added as one of the possible options. |
 | yes/no | species case of list defined for convenience, with “yes” and “no” values only. Null are also allowed. |
  
 OPTION_JSON Object
