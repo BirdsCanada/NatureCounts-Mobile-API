@@ -415,7 +415,9 @@ possible field_type values:
 | checkbox | a checkbox (true or false). defaults to false. |
 | dropdown | A drop down list, with values defined in `options` attribute. Open a modal window in all cases. If the field is not required, null should be added as one of the possible options. |
 | yes/no | species case of list defined for convenience, with “yes” and “no” values only. Null are also allowed. |
- 
+| radio	| a radio button, with values defined in options attribute. If the field is not required, null should be added as one of the possible options so the field can be deselected. |
+| multi-checkbox | similar to a radio type, but using checkboxes that can support multiple selections |
+
 OPTION_JSON Object
 
 Carries option values and labels for field_type `dropdown`
