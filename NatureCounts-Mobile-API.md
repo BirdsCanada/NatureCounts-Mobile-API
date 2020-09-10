@@ -751,6 +751,7 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | speciesId | Integer | Yes | numeric NatureCounts taxononic ID |
 | records | JSON Array | Yes | and array of RECORD_JSON objects |
 | flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
+| comments | String | No | additional species comments provided by the user |
 
 <div style="padding: 15px">
 <sup>1</sup> Values for SPECIES_JSON.flag:
@@ -770,7 +771,6 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
 | breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
 | counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
-| comments | String | No | additional species comments provided by the user |
 | distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
