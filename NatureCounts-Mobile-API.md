@@ -77,6 +77,10 @@ Returns the profile associated with the token.
 | last_name | The surname |
 | first_name | The firstname |
 | email | The email address |
+| isAdmin | 'Y' if the user has admin access |
+
+Note: The isAdmin parameter can be included on all of the data queries listed below. Where
+appropriate it will be used to filter results.
 
 
 
@@ -210,7 +214,7 @@ Return a list of all projects relevant to the mobile app:
 
 > /api/mobile/projects?lang=EN
 
-
+Supports isAdmin parameter.
 
 
 ### Provinces ###
@@ -333,6 +337,7 @@ Returns protocol ID's associated with a project:
 
 > /api/mobile/projectProtocols?lang=EN&projectId=1007
 
+Supports isAdmin parameter.
 
 
 **Additional Parameter(s):**
