@@ -672,10 +672,10 @@ The response to an invalid checklist submisson has not yet been defined......
 | --------- | ---- | -------- | ----- |
 | obsDate | String | Yes | The observation date in ISO format (eg: 2020-01-25) |
 | nObservers | Integer | No | Number of observers (default: 1) |
-| utmSquare | String | No | The utm square as 7-character code, if applicable |
-| statprov | String | No | 2-character province code |
-| regionId | Integer | No | Region ID |
-| ebirdChecklistId | String | No | eBird checklist ID used to validate this checklist, when applicable |
+| utmSquare | String | Yes | The utm square as 7-character code, if applicable |
+| statprov | String | Yes | 2-character province code |
+| regionId | Integer | Yes | Region ID |
+| ebirdChecklistId | String | Yes | eBird checklist ID used to validate this checklist, when applicable |
 | protocolId | Integer | Yes | Protocol ID |
 | track | JSON Array | No | A vector of JSON objects of type TRACK_JSON (when the track feature is enabled) |
 | isComplete | Boolean | No | Set to true if checklist reports every species detected |
@@ -712,7 +712,7 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
-| stationId | Integer | No | stationId 0 is reserved for representing the entire checklist period, and stationId 1 or greater represent linked survey events within the checklist (e.g. point counts) |
+| stationId | Integer | Yes | stationId 0 is reserved for representing the entire checklist period, and stationId 1 or greater represent linked survey events within the checklist (e.g. point counts) |
 | startTime | Float | Yes | Start time of the observation. For stationId 0, this is the start of the entire checklist (in decimal hours) |
 | effortType | String | Yes | One of: incidental, traveling, stationary or area search |
 | duration | Float | Yes | Duration in decimal hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations |
@@ -774,14 +774,14 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | Attribute | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
-| breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
+| breedingEvid | Integer | No | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
 | counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
 | distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
 | positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
 | positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
 | positionsCounts | JSON Array | No | Not yet applicable: list of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
-| time | Float | Yes | The decimal minutes since start of the observation |
-| longitude | Float | Yes | the longitude of the record observation |
-| latitude | Float | Yes | the latitude of the record observation |
+| time | Float | No | The decimal minutes since start of the observation |
+| longitude | Float | No | the longitude of the record observation |
+| latitude | Float | No | the latitude of the record observation |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) |
