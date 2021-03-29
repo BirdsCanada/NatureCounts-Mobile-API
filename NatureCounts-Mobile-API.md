@@ -547,10 +547,9 @@ Returns information about project sites within a region:
 
 ### UTM Squares by Region ###
 
-Returns information about project sites within a region:
+Returns information about atlas squares within a region:
 
 > /api/mobile/utmSquares?lang=EN&projectId=1007&statprov=ON&regionId=15
-
 
 
 **Additional Parameter(s):**
