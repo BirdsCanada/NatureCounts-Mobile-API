@@ -509,7 +509,7 @@ Returns species appropriate for a region within a province:
 
 Returns information about project sites within a bounding box:
 
-> /api/mobile/sitesCoordinates?lang=EN&statprov=ON&regionId=15
+> /api/mobile/sitesCoordinates?lang=EN&projectId=1007&locType=EBIRD&swLat=46&swLon=-74&neLat=46.5&neLon=-73.5
 
 **Additional Parameter(s):**
 
