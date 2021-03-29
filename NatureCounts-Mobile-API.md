@@ -568,8 +568,7 @@ Returns information about project sites within a region:
 
 Returns information about sites within a specific UTM square:
 
-> /api/mobile/sitesSquares?lang=EN&projectId=1007&locType=EBIRD&utmSquare=L2291607
-
+> /api/mobile/sitesSquares?lang=EN&projectId=1007&locType=EBIRD&utmSquare=17TNH42
 
 
 **Additional Parameter(s):**
