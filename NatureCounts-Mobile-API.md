@@ -521,8 +521,7 @@ Returns information about project sites within a bounding box:
 | swLon | Float | Yes | The decimal longitude of the south-west corner of the bounding box |
 | neLat | Float | Yes | The decimal latitude of the north-east corner of the bounding box |
 | neLon | Float | Yes | The decimal longitude of the north-east corner of the bounding box |
-
-
+| protocolId | Integer | No | A protocol ID used to filter based on locType |
 
 
 
@@ -562,7 +561,6 @@ Returns information about atlas squares within a region:
 
 
 
-
 ### Sites by Square ###
 
 Returns information about sites within a specific UTM square:
@@ -577,7 +575,27 @@ Returns information about sites within a specific UTM square:
 | projectId | Integer | Yes | A project ID |
 | locType | String | Yes | A location type (e.g.: EBIRD) |
 | utmSquare | String | Yesy | A utm square identifier |
+| protocolId | Integer | No | A protocol ID used to filter based on locType |
 
+
+
+### Sites by radius ###
+
+Returns information about sites within a certain radius (in meters) from a central point:
+
+> /api/mobile/sitesRadius?lang=EN&projectId=1007&protocolId=116&lat=42.614571&lon=-80.456971&radius=10000
+
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | No | A protocol ID used to filter based on locType |
+| locType | String | No | A location type (e.g.: EBIRD) |
+| lat | Float | Yes | decimal degrees of latitude |
+| lon | Float | Yes | decimal degrees of longitude |
+| radius | Float | Yes | maximum distance in meters |
 
 
 
