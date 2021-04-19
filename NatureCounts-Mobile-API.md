@@ -758,11 +758,12 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
 | counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
 | comments | String | No | additional species comments provided by the user |
-| distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
-| bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
-| positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
-| positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
-| positionsCounts | JSON Array | No | Not yet applicable: list of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
+| distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. |
+| bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  |
+| positionsLongitude | JSON Array | No | List of coordinates representing individual longitude of birds of a given species |
+| positionsLatitude | JSON Array | No | List of coordinates representing individual latitude of birds of a given species |
+| positionsCounts | JSON Array | No | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
+| positionsBreedingEvid | JSON Array | No | List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
 | flag | Integer | Yes | Code for the type of flag used to validate the data based on the species lists, indicating which observations should be documented<sup>1</sup> |
 
 **The SPECIES2_JSON structure:**
@@ -792,11 +793,12 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
 | breedingEvid | Integer | No | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
 | counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
-| distanceToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
-| bearingToBird | Float | No | Not yet applicable: for protocols that support multiple records per species in the same station |
-| positionsLongitude | JSON Array | No | Not yet applicable: list of coordinates representing individual longitude of birds of a given species |
-| positionsLatitude | JSON Array | No | Not yet applicable: list of coordinates representing individual latitude of birds of a given species |
-| positionsCounts | JSON Array | No | Not yet applicable: list of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
+| distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. |
+| bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  |
+| positionsLongitude | JSON Array | No | List of coordinates representing individual longitude of birds of a given species |
+| positionsLatitude | JSON Array | No | List of coordinates representing individual latitude of birds of a given species |
+| positionsCounts | JSON Array | No | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
+| positionsBreedingEvid | JSON Array | No | List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
 | time | Float | No | The decimal minutes since start of the observation |
 | longitude | Float | No | the longitude of the record observation |
 | latitude | Float | No | the latitude of the record observation |
