@@ -738,6 +738,9 @@ Example: track: {"longitude": [-80.123456, -80.123457, -80.123458], "latitude": 
 | intervalIds | Integer | No | list of interval_id's used for the protocol in the species data (if missing, the id's are assumed to be incremental (e.g. 1, 2, 3), but this may not always be true for all protocols. If provided, this is expected to match the size of the counts array in species under this station. For station 0, use the intervals matching the protocolId, for other stations, this should be the intervals matching subProtocolId |
 | latitude | Float | Yes | Decimal latitiude at the start of the station |
 | longitude | Float | Yes | Degrees longitude at the start of the station |
+| locationAccuracyRange | Float | No | Location accuracy (in meters) provided by the GPS |
+| locationSelectionTime | Long | No | Unix Timestamp indicating when the site location was selected by the user |
+| locationAutoSelected | Boolean | No | Whether the location coordinates were derived from the GPS (true), or from the map (false) |
 | locId | Integer | No | Existing location ID when submitting from an existing site, or resubmitting an existing checklist |
 | locName | String | Yes | Name of the location. names of public sites should not be editable |
 | comments | String | No | General comments for the station |
@@ -758,8 +761,11 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
 | counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
 | comments | String | No | additional species comments provided by the user |
-| distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. |
-| bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  |
+| distance | Float | No | Distance (in meter) between the bird and the observer. Only applicable to protocols supporting multiple records per species. |
+| distanceToBird | Float | No | DEPRECATED. use "distance". Distance (in meter) between the bird and the observer. Only applicable to protocols supporting multiple records per species. |
+| direction | String | No | Cardinal direction (e.g. N, NW, SE, etc.) of the bird relative to the observer. Only applicable to protocols supporting multiple records per species. |
+| bearing | Integer | No | Bearing (in degrees) of the bird position relative to the observer. Only applicable to protocols supporting multiple records per species. |
+| bearingToBird | Integer | No | DEPRECATED. Use "bearing". Bearing (in degrees) of the bird position relative to the observer. Only applicable to protocols supporting multiple records per species. |
 | positionsLongitude | JSON Array | No | List of coordinates representing individual longitude of birds of a given species |
 | positionsLatitude | JSON Array | No | List of coordinates representing individual latitude of birds of a given species |
 | positionsCounts | JSON Array | No | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) |
