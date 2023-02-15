@@ -379,6 +379,32 @@ Returns information on a specific protocol intervals:
 | protocolId | Integer | Yes | A protocol ID |
 
 
+### Protocol Intervals Bands ###
+
+Returns information on a specific protocol intervals distance bands for the Point Count protocols:
+
+> /api/mobile/protocolIntervalsBands?lang=EN&projectId=1007&protocolId=95
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
+
+### Protocol Intervals Time ###
+
+Returns information on a specific protocol time intervals for the Point Count protocols:
+
+> /api/mobile/protocolIntervalsTime?lang=EN&projectId=1007&protocolId=95
+
+**Additional Parameter(s):**
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| projectId | Integer | Yes | A project ID |
+| protocolId | Integer | Yes | A protocol ID |
+
 
 ### Protocol Custom Variables ###
 
