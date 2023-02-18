@@ -833,18 +833,18 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | Attribute | Type | Required | Notes | Mode |
 | --------- | ---- | -------- | ----- | ---- |
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions | Ex\|PC |
-| breedingEvid | Integer | No | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API accepts either the numeric value or the alpha code | Ex\|PC |
-| counts | JSON Array | Yes | A vector of counts matching the protocol requirement. For point counts, the array is always of length 1. | Ex\|PC |
-| distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. | Ex |
-| bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  | Ex |
+| breedingEvid | Integer | No | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API accepts either the numeric value or the alpha code | Ex |
+| counts | JSON Array | Yes | A vector of counts matching the protocol requirement. For point counts, the array is always of length 1. | Ex |
+| distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. | Ex\PC |
+| bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  | Ex\PC |
 | positionsLongitude | JSON Array | Deprecated | List of coordinates representing individual longitude of birds of a given species | Ex |
 | positionsLatitude | JSON Array | Deprecated | List of coordinates representing individual latitude of birds of a given species | Ex |
 | positionsCounts | JSON Array | Deprecated | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
 | positionsBreedingEvid | JSON Array | Deprecated | List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
-| positionsArray | JSON Array | No | Array of position objects (markers for rare species in list entry), each with the following elements: latitude, longitude, count and breedingEvid, representing individual point markers  | Ex |
+| positionsArray | JSON Array | No | Array of position objects (markers for rare species in list entry), each with the following elements: **latitude, longitude, count and breedingEvid**, representing individual point markers  | Ex\PC |
 | time | Float | No | The decimal minutes since start of the observation | Ex |
-| longitude | Float | No | the longitude of the record observation. Required for PC. | Ex\|PC |
-| latitude | Float | No | the latitude of the record observation. Required for PC. | Ex\|PC |
+| longitude | Float | No | the longitude of the record observation. | Ex |
+| latitude | Float | No | the latitude of the record observation. | Ex |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level. | Ex\|PC |
 | speciesCode | Integer | Yes | species 4-letter code entered by the user for point count entry. | PC |
 | bandId | Integer | Yes | distance band ID (as defined by the protocol) matching the distance from the observer for the marker (e.g. bandId = 1 for 0-50 meters) | PC |
