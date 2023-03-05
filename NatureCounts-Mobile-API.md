@@ -719,7 +719,7 @@ TODO: need to document the response to an invalid checklist submisson.
 | regionId | Integer | Yes | Region ID | Ex\|PC |
 | ebirdChecklistId | String | Yes | eBird checklist ID used to validate this checklist, when applicable | Ex\|PC |
 | protocolId | Integer | Yes | Protocol ID | Ex\|PC |
-| track | JSON Array | No | A vector of JSON objects of type TRACK_JSON (when the track feature is enabled) | Ex |
+| track | JSON Object | No | A vector of JSON objects of type TRACK_JSON (when the track feature is enabled) | Ex |
 | isComplete | Boolean | No | Set to true if checklist reports every species detected | Ex\|PC |
 | stations | JSON Array | Yes | A vector of JSON objects of type STATION_JSON | Ex\|PC |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see below) at the checklist level | Ex\|PC |
@@ -771,7 +771,7 @@ The station object structure is used for both the list and the map entry modes (
 | area | Float | Yes | Area in ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations | Ex |
 | subProtocolId | Integer | Deprecated | Identifier for the station sub-protocol. Ignored when stationId = 0 | Ex |
 | intervalIds | Integer | No | list of interval_id's used for the protocol in the species data (if missing, the id's are assumed to be incremental (e.g. 1, 2, 3), but this may not always be true for all protocols. If provided, this is expected to match the size of the counts array in species under this station. For station 0, use the intervals matching the protocolId, for other stations, this should be the intervals matching subProtocolId | Ex\|PC |
-| latitude | Float | Yes | Decimal latitiude at the start of the station | Ex\|PC |
+| latitude | Float | Yes | Decimal latitude at the start of the station | Ex\|PC |
 | longitude | Float | Yes | Degrees longitude at the start of the station | Ex\|PC |
 | locationAccuracyRange | Float | No | Location accuracy (in meters) provided by the GPS | Ex\|PC |
 | locationSelectionTime | Long | No | Unix Timestamp indicating when the site location was selected by the user | Ex\|PC |
