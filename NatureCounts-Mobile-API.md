@@ -841,12 +841,20 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | positionsLatitude | JSON Array | Deprecated | List of coordinates representing individual latitude of birds of a given species | Ex |
 | positionsCounts | JSON Array | Deprecated | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
 | positionsBreedingEvid | JSON Array | Deprecated | List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
-| positionsArray | JSON Array | No | Array of position objects (markers for rare species in list entry), each with the following elements: **latitude, longitude, count and breedingEvid**, representing individual point markers  | Ex\|PC |
+| positionsArray | JSON Array | No | Array of POSITIONS_JSON objects (see below; markers for rare species in list entry), each with the following elements: **latitude, longitude, count, breedingEvid (including bandId and timeIntervalId for point counts)**, representing individual point markers  | Ex\|PC |
 | time | Float | No | The decimal minutes since start of the observation | Ex |
 | longitude | Float | No | the longitude of the record observation. | Ex |
 | latitude | Float | No | the latitude of the record observation. | Ex |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level. | Ex\|PC |
 | speciesCode | Integer | Yes | species 4-letter code entered by the user for point count entry. | PC |
+
+**The POSITIONS_JSON structure:**
+
+| Attribute | Type | Required | Notes | Mode |
+| --------- | ---- | -------- | ----- | ---- |
+| latitude | Float | Yes | decimal latitude coordinates for the marker  | Ex\|PC |
+| longitude | Float | Yes | decimal longitude coordinates for the marker  | Ex\|PC |
+| breedingEvid | String/Integer | No | breeding code for the marker  | Ex\|PC |
+| count | Integer | No | count of the number of individual at the marker position  | Ex\|PC |
 | bandId | Integer | Yes | distance band ID (as defined by the protocol) matching the distance from the observer for the marker (e.g. bandId = 1 for 0-50 meters) | PC |
 | timeIntervalId | JSON Array | Yes | array of time intervals ID's (as defined by the protocol) and matching the time intervals in which the observer has reported a record. The protocol option multiple_intervals defines whether multiple values can be entered in this array. | PC |
-| intervalId | JSON Array | Yes | array of intervals ID's (as defined by the protocol). The array length is expected to be the same as the timeIntervalId array. These numbers represent the unique protocol interval(s) that matches the unique combination of bandId and individual timeIntervalId values. | PC |
