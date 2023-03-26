@@ -836,9 +836,6 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. | Ex\|PC |
 | bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  | Ex\|PC |
 | positionsArray | JSON Array | No | Array of POSITIONS_JSON objects (see below; markers for rare species in list entry), each with the following elements: **latitude, longitude, count, breedingEvid (including bandId and timeIntervalId for point counts)**, representing individual point markers  | Ex\|PC |
-| time | Float | No | The decimal minutes since start of the observation | Ex |
-| longitude | Float | No | the longitude of the record observation. | Ex |
-| latitude | Float | No | the latitude of the record observation. | Ex |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level. | Ex\|PC |
 | speciesCode | Integer | Yes | species 4-letter code entered by the user for point count entry. | PC |
 | counts | JSON Array | *Deprecated*  | DEPRECATED (see positionsArray). A vector of counts matching the protocol requirement. For point counts, the array is always of length 1. Note: counts for intervals are now stored in the customVars object.  | Ex |
@@ -846,6 +843,9 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | positionsLatitude | JSON Array | *Deprecated*  | DEPRECATED (see positionsArray). List of coordinates representing individual latitude of birds of a given species | Ex |
 | positionsCounts | JSON Array | *Deprecated*  | DEPRECATED (see positionsArray). List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
 | positionsBreedingEvid | JSON Array | *Deprecated*  | DEPRECATED (see positionsArray). List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
+| longitude | Float | *Deprecated* | the longitude of the record observation. | Ex |
+| latitude | Float | *Deprecated* | the latitude of the record observation. | Ex |
+| time | Float | *Deprecated* | The decimal minutes since start of the observation | Ex |
 
 **The POSITIONS_JSON structure:**
 
