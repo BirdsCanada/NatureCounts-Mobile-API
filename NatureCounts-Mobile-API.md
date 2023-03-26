@@ -769,8 +769,6 @@ The station object structure is used for both the list and the map entry modes (
 | duration | Float | Yes | Duration in decimal hours, required except for incidental protocols. For stationId 0, this is the duration of the entire checklist INCLUDING sub stations | Ex\|PC |
 | distance | Float | Yes | Distance in km for travelling protocols. For stationId 0, this is the distance of the entire checklist INCLUDING sub stations | Ex |
 | area | Float | Yes | Area in ha for area search protocols. For stationId 0, this is the area of the entire checklist INCLUDING sub stations | Ex |
-| subProtocolId | Integer | Deprecated | Identifier for the station sub-protocol. Ignored when stationId = 0 | Ex |
-| intervalIds | Integer | No | list of interval_id's used for the protocol in the species data (if missing, the id's are assumed to be incremental (e.g. 1, 2, 3), but this may not always be true for all protocols. If provided, this is expected to match the size of the counts array in species under this station. For station 0, use the intervals matching the protocolId, for other stations, this should be the intervals matching subProtocolId | Ex\|PC |
 | latitude | Float | Yes | Decimal latitude at the start of the station | Ex\|PC |
 | longitude | Float | Yes | Degrees longitude at the start of the station | Ex\|PC |
 | locationAccuracyRange | Float | No | Location accuracy (in meters) provided by the GPS | Ex\|PC |
@@ -781,6 +779,8 @@ The station object structure is used for both the list and the map entry modes (
 | comments | String | No | General comments for the station | Ex\|PC |
 | customVars | JSON Array | No | Vector of custom variables, unique to the protocol. JSON structure of type CUSTOM_JSON (see above) at the station level| Ex\|PC |
 | species | JSON Array | Yes | A vector of JSON objects of type SPECIES_JSON or of type SPECIES2_JSON | Ex\|PC |
+| subProtocolId | Integer | Deprecated | Identifier for the station sub-protocol. Ignored when stationId = 0 | Ex |
+| intervalIds | Integer | Deprecated | list of interval_id's used for the protocol in the species data (if missing, the id's are assumed to be incremental (e.g. 1, 2, 3), but this may not always be true for all protocols. If provided, this is expected to match the size of the counts array in species under this station. For station 0, use the intervals matching the protocolId, for other stations, this should be the intervals matching subProtocolId. Note: now that interval counts are stored in the customVars object, the list of intervalIds should no longer be used. | Ex\|PC |
 
 Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobile/submitChecklistEx entrypoint
 
@@ -793,7 +793,7 @@ Note: the SPECIES2_JSON structure is used only when submitting via the /api/mobi
 | speciesId | Integer | Yes | numeric NatureCounts taxononic ID |
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions |
 | breedingEvid | Integer | Yes | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API requires the numeric identifier |
-| counts | JSON Array | Yes | A vector of counts matching the protocol requirement |
+| counts | JSON Array | Deprecated | DEPRECATED. A vector of counts matching the protocol requirement |
 | comments | String | No | additional species comments provided by the user |
 | distance | Float | No | Distance (in meter) between the bird and the observer. Only applicable to protocols supporting multiple records per species. |
 | distanceToBird | Float | No | DEPRECATED. use "distance". Distance (in meter) between the bird and the observer. Only applicable to protocols supporting multiple records per species. |
@@ -834,19 +834,19 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | --------- | ---- | -------- | ----- | ---- |
 | recordId | Integer | No | existing recordId provided by the API when resubmitting an existing checklist, blank for new submissions | Ex\|PC |
 | breedingEvid | Integer | No | numeric ID for the breeding evidence code. Users should only see the associated alpha breeding code, but the API accepts either the numeric value or the alpha code | Ex |
-| counts | JSON Array | Yes | A vector of counts matching the protocol requirement. For point counts, the array is always of length 1. | Ex |
 | distanceToBird | Float | No | For protocols that support multiple records per species in the same station. Distance to birds from observer in meters. | Ex\|PC |
 | bearingToBird | Float | No | For protocols that support multiple records per species in the same station. Bearing to birds from observer in degrees (0 = north).  | Ex\|PC |
-| positionsLongitude | JSON Array | Deprecated | List of coordinates representing individual longitude of birds of a given species | Ex |
-| positionsLatitude | JSON Array | Deprecated | List of coordinates representing individual latitude of birds of a given species | Ex |
-| positionsCounts | JSON Array | Deprecated | List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
-| positionsBreedingEvid | JSON Array | Deprecated | List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
 | positionsArray | JSON Array | No | Array of POSITIONS_JSON objects (see below; markers for rare species in list entry), each with the following elements: **latitude, longitude, count, breedingEvid (including bandId and timeIntervalId for point counts)**, representing individual point markers  | Ex\|PC |
 | time | Float | No | The decimal minutes since start of the observation | Ex |
 | longitude | Float | No | the longitude of the record observation. | Ex |
 | latitude | Float | No | the latitude of the record observation. | Ex |
 | customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level. | Ex\|PC |
 | speciesCode | Integer | Yes | species 4-letter code entered by the user for point count entry. | PC |
+| counts | JSON Array | Deprecated | DEPRECATED (see positionsArray). A vector of counts matching the protocol requirement. For point counts, the array is always of length 1. Note: counts for intervals are now stored in the customVars object.  | Ex |
+| positionsLongitude | JSON Array | Deprecated | DEPRECATED (see positionsArray). List of coordinates representing individual longitude of birds of a given species | Ex |
+| positionsLatitude | JSON Array | Deprecated | DEPRECATED (see positionsArray). List of coordinates representing individual latitude of birds of a given species | Ex |
+| positionsCounts | JSON Array | Deprecated | DEPRECATED (see positionsArray). List of integer values representing individual counts of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
+| positionsBreedingEvid | JSON Array | Deprecated | DEPRECATED (see positionsArray). List of integer values representing the breeding evidence code of birds of a given species at the coordinates given by positionsLongitude and positionsLatitude (at the same index position) | Ex |
 
 **The POSITIONS_JSON structure:**
 
