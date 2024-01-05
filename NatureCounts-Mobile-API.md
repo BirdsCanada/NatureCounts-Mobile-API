@@ -25,6 +25,7 @@ Use the following host to test against the current sandbox environment:
 6. [Data Submission](#data-submission)
 	1. [Adding a Site](#add-a-site)
 	2. [Checklist Submission](#checklist-submission)
+7. [Binary files](#binary-files)
 
 
 ## Authentication and User Profile ##
@@ -857,3 +858,114 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | count | Integer | No | count of the number of individual at the marker position  | Ex\|PC |
 | bandId | Integer | Yes | distance band ID (as defined by the protocol) matching the distance from the observer for the marker (e.g. bandId = 1 for 0-50 meters) | PC |
 | timeIntervalId | JSON Array | Yes | array of time intervals ID's (as defined by the protocol) and matching the time intervals in which the observer has reported a record. The protocol option multiple_intervals defines whether multiple values can be entered in this array. | PC |
+
+## Binary Files ##
+
+Binary files were introduced in late 2023 as a way to optimize the offline data caching process and replace several of the API calls that were retrieving large amounts of data in a JSON format and inserting them locally in a sqlite file within the app. 
+
+Each table (previously accessed as a JSON object) are now stored in one of the available binaries. Binaries are cached on the API server, and updated at a varying frequency depending on the type of data. For for types of binaries, there are multiple files available depending on the language, each represented by a unique key (e.g. project-1007-en), the project and the state/province(s) selected by the user.  Note that all keys are in **lower case**. Binaries are grouped as follow:
+
+| binary name | parameters | scope | update freq. | key structure |
+| ----------- | ---------- | ----- | ------------ | ------------- |
+| core | lang | app-wide | uncommon | core-&lt;lang&gt; |
+| session | lang | app-wide | common | session-&lt;lang&gt; |
+| project | lang, projectId | project | common | project-&lt;projectId&gt;-&lt;lang&gt; |
+| sites | projectId, statprov | project and jurisdisction | monthly or less | sites-&lt;projectId&gt;-&lt;statprov&gt; |
+| species | statprov | jurisdisction | monthly | species-&lt;statprov&gt; |
+| squares | statprov | jurisdisction | rare | squares-&lt;statprov&gt; |
+
+### List of tables included in binaries ###
+
+Note that the table names and their content should match the API entry points used previously to download JSON data (e.g. breedingCodes contains the same data as /api/mobile/breedingCodes). Please refer to the documentation above for each table.
+
+**core**:
+- breedingCodes
+- languages
+- provinces
+- regions
+- species
+- speciesGroups
+- speciesInvalidBreedingEvidence
+- speciesCodes
+- speciesStatusSymbols
+
+**session**:
+- projects
+- projectsProvinces
+- listBinaries 
+
+**project**:
+- protocolIntervals
+- protocolIntervalsBands
+- protocolIntervalsTime
+- projectProtocols
+- protocolsSpecies
+- protocolCustomVars
+- protocolDetails
+
+**sites**:
+- sitesSquares
+
+**species**:
+
+- speciesProvince
+- speciesRegion
+- speciesEbird
+- speciesEbirdLimits 
+- speciesBreedingDates
+
+**squares**:
+- utmSquares
+
+### Binary API details ###
+
+### List of Binaries ###
+
+> /api/mobile/listBinaries
+
+Returns a complete table of the binaries available for all projects on the server side, including the date when they were last modified. This entry point is more for information and likely not needed by the app. Note that the content of this query is also available within the _session_ binaries.
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The user's token |
+
+The response to a valid request is a JSON array containing the list of all binary files available across all projects, languages and regions:
+
+| Parameter | Type | Notes |
+| --------- | ---- | ----- |
+| key | String | a String representing the key for the binary file (e.g. core-en, project-1007-en) |
+| table group | String | The table group to which the binary belongs (core, project, session, sites, species, or squares) |
+| statprov | String | The state of province code for the binary (only applicable for binaries within the sites, species and squares groups) |
+| project_id | Integer | The project ID for the binary (only applicable for binaries within the project and sites groups) |
+| lang | String | The language code (EN or FR) for the binary (only applicable for binaries within the core, project and session) |
+| last_modified | Datetime | The datetime string at which the binary was last modified |
+| file_size | Integer | The size of the binary in bytes |
+
+### Downloading a single binary file ###
+
+> /api/mobile/binaries/sqlite
+
+Returns a single binary file (sqlite format) matching the unique key (e.g. project-1007-fr).  If the file requested does not exist a 404 error is returned. I suspect this entry point will not be necessary and all downloads should be requested using the zip format, including those that only require a single file.
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The user's token |
+| file | String | Yes | the key for the binary file (e.g. project-1007-en) |
+
+Response: a sqlite file 
+
+### Downloading multiple binary files as a zip archive ###
+
+> /api/mobile/binaries/zip
+
+Returns a zip file containing several binaries files (sqlite format) matching the unique keys provided in the request (e.g. project-1007-fr). Binaries will be included in the response only when the server version of the binary is newer than the last_modified value, or when the last_modified value provided in the request is missing or null. If no binaries match the request (i.e. the app already has all the required files), an empty zip file will be returned.
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The user's token |
+| files | JSON array | Yes | An array of objects containing details about the files to download. Each object contains a file (required) and a last_modified (optional) value (using Linux timestamps in seconds since the Unix epoch)  |
+
+Example request: token=XXXXX&files=[{file: “project-1007-en”,last_modified: 1701916988},{file: “project-1007-fr”,last_modified: 1701916997},{file:”session-en”}]
+
+Response: a zip file containing sqlite binaries
+
