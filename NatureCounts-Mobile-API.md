@@ -84,9 +84,6 @@ Note: The isAdmin parameter can be included on all of the data queries listed be
 appropriate it will be used to filter results.
 
 
-
-
-
 ### Project Registration ###
 
 Project registration may require that the project administrator authorizes the registration.
@@ -95,15 +92,47 @@ entrypoint (see below).
 
 A user registration request is triggred by the following:
 
-> /api/mobile/projectRegister?token=asdfasdf&projectId=95
+> /api/mobile/projectRegister?token=asdfasdf&projectId=95&userCode=user+code&note=user+note
 
 | Parameter | Type | Required | Notes |
 | --------- | ---- | -------- | ----- |
 | token | String | Yes | The authentication token |
 | projectId | Integer | Yes | The project to which the user will be registered |
-| lang | String | No | A 2-letter language code, defaulting to EN |
+| userCode | String | No | An optional project-specific user code provided by the user (max 20 chars) |
+| note | String | No | An optional project-specific registration note provided by the user (unlimited chars) |
+
+**Return JSON attributes:**
+
+| Attribute | Type | Notes |
+| --------- | ---- | ----- |
+| success | String | success or failed depending on the status of the response |
+| newStatus | Integer | new user status after the update (2 = pending approval, 7 = registered, etc.) |
+| respCode | String | response code (probably no need to implement in the app) |
 
 
+### Project De-Registration ###
+
+Project de-registration is only available for non-admin project users or global admins.
+A user's status in a project is returned as part of the response to the `/api/mobile/userProjects`
+entrypoint (see below).
+
+A user de-registration request is triggred by the following:
+
+> /api/mobile/projectDeregister?token=asdfasdf&projectId=95&note=user+note
+
+| Parameter | Type | Required | Notes |
+| --------- | ---- | -------- | ----- |
+| token | String | Yes | The authentication token |
+| projectId | Integer | Yes | The project to which the user will be registered |
+| note | String | No | An optional project-specific de-registration note provided by the user (unlimited chars) |
+
+**Return JSON attributes:**
+
+| Attribute | Type | Notes |
+| --------- | ---- | ----- |
+| success | String | success or failed depending on the status of the response |
+| newStatus | Integer | new user status after the update (2 = pending approval, 7 = registered, etc.) |
+| respCode | String | response code (probably no need to implement in the app) |
 
 ## API and Data Version ##
 
