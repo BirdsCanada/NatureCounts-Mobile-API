@@ -107,7 +107,7 @@ A user registration request is triggred by the following:
 | --------- | ---- | ----- |
 | success | String | success or failed depending on the status of the response |
 | newStatus | Integer | new user status after the update (2 = pending approval, 7 = registered, etc.) |
-| respCode | String | response code (success: already_registered, registr_success, registr_pending; failure: cannot_register) |
+| respCode | String | response code (success: already_registered, registr_success, registr_pending; failure: cannot_register; global admins only (by passes approval): registr_approved) |
 
 
 ### Project De-Registration ###
