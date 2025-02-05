@@ -18,7 +18,7 @@ Use the following host to test against the current sandbox environment:
 	1. [Authentication](#authentication)
 	2. [User Profile](#user-profile)
 	3. [Project Registration](#project-registration)
-        4. [Project De-Registration](#project-deregistration)
+	4. [Project De-Registration](#project-de-registration)
 2. [API and Data Version](#api-and-data-version)
 3. [API Last Modified Times Bundle](#api-last-modified-times-bundle)
 4. [Errors](#errors)
@@ -91,7 +91,7 @@ Project registration may require that the project administrator authorizes the r
 A user's status in a project is returned as part of the response to the `/api/mobile/userProjects`
 entrypoint (see below).
 
-A user registration request is triggred by the following:
+A user registration request is triggered by the following:
 
 > /api/mobile/projectRegister?token=asdfasdf&projectId=95&userCode=user+code&note=user+note
 
@@ -117,7 +117,7 @@ Project de-registration is only available for non-admin project users or global 
 A user's status in a project is returned as part of the response to the `/api/mobile/userProjects`
 entrypoint (see below).
 
-A user de-registration request is triggred by the following:
+A user de-registration request is triggered by the following:
 
 > /api/mobile/projectDeregister?token=asdfasdf&projectId=95&note=user+note
 
