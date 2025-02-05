@@ -18,6 +18,7 @@ Use the following host to test against the current sandbox environment:
 	1. [Authentication](#authentication)
 	2. [User Profile](#user-profile)
 	3. [Project Registration](#project-registration)
+        4. [Project De-Registration](#project-deregistration)
 2. [API and Data Version](#api-and-data-version)
 3. [API Last Modified Times Bundle](#api-last-modified-times-bundle)
 4. [Errors](#errors)
