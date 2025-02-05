@@ -107,7 +107,7 @@ A user registration request is triggred by the following:
 | --------- | ---- | ----- |
 | success | String | success or failed depending on the status of the response |
 | newStatus | Integer | new user status after the update (2 = pending approval, 7 = registered, etc.) |
-| respCode | String | response code (probably no need to implement in the app) |
+| respCode | String | response code (success: already_registered, registr_success, registr_pending; failure: cannot_register) |
 
 
 ### Project De-Registration ###
@@ -132,7 +132,7 @@ A user de-registration request is triggred by the following:
 | --------- | ---- | ----- |
 | success | String | success or failed depending on the status of the response |
 | newStatus | Integer | new user status after the update (2 = pending approval, 7 = registered, etc.) |
-| respCode | String | response code (probably no need to implement in the app) |
+| respCode | String | response code (success: not_registered, delete_success; failure: cannot_delete) |
 
 ## API and Data Version ##
 
