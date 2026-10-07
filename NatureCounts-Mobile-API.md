@@ -870,8 +870,8 @@ In list entry (Ex), each record may either represent a single species (multiple_
 | count | Integer | Yes                                                                    | count of the number of individual at the marker position                                                                                                                                                                                    | Ex\|PC |
 | bandId | Integer | Yes                                                                    | distance band ID (as defined by the protocol) matching the distance from the observer for the marker (e.g. bandId = 1 for 0-50 meters)                                                                                                      | PC |
 | timeIntervalId | JSON Array | Yes                                                                    | array of time intervals ID's (as defined by the protocol) and matching the time intervals in which the observer has reported a record. The protocol option multiple_intervals defines whether multiple values can be entered in this array. | PC |
-| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level.                                                                                                                                                                         | Ex\|PC |
-
+| detectionType | String | No | The detection type for this record. | Pc | 
+| customVars | JSON Array | No | JSON structure of type CUSTOM_JSON (see above) at the record level.                                                                                                                                                                         | PC |
 
 
 
